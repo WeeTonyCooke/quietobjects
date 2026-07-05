@@ -39,11 +39,11 @@ export function SignalArtwork({ experience, reducedMotion }) {
           </video>
         </div>
 
-        <LogoLockup
-          visible={experience.identityVisible}
-          descriptorVisible={experience.divisionVisible}
-        />
       </div>
+      <LogoLockup
+        visible={experience.identityVisible}
+        descriptorVisible={experience.divisionVisible}
+      />
     </div>
   )
 }

@@ -59,32 +59,61 @@
 .signal-media--ready { opacity: 1; }
 
 .mca-lockup {
-  margin-top: clamp(.75rem, 1.6vh, 1.25rem);
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
   display: inline-flex;
   flex-direction: column;
-  align-items: center;
-  gap: clamp(.65rem, 1.4vh, .9rem);
-  color: #f5f5f0;
+  align-items: flex-end;
+  gap: clamp(.55rem, 1.1vh, .75rem);
+  color: #ebebeb;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  text-align: center;
+  text-align: right;
   visibility: hidden;
   opacity: 0;
 }
 
 .mca-lockup--visible {
   visibility: visible;
-  opacity: .88;
+  opacity: .65;
+}
+
+.mca-optical-filter {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.mca-mark {
+  position: relative;
+  display: block;
+  width: clamp(167px, 18.5vw, 264px);
+  aspect-ratio: 1098 / 411;
 }
 
 .mca-logo {
+  position: absolute;
+  inset: 0;
   display: block;
-  width: clamp(190px, 21vw, 300px);
+  width: 100%;
   height: auto;
+  image-rendering: auto;
+}
+
+.mca-logo--fill {
+  opacity: .2;
+  filter: brightness(.922);
+}
+
+.mca-logo--rim {
+  opacity: .52;
+  filter: url('#mca-optical-rim');
 }
 
 .mca-descriptor {
   margin: 0;
-  color: rgba(245, 245, 240, .68);
+  color: rgba(235, 235, 235, .68);
   font-size: clamp(.58rem, .53rem + .12vw, .7rem);
   font-weight: 300;
   line-height: 1.2;
@@ -238,7 +267,11 @@
   }
 
   .mca-logo {
-    width: clamp(160px, 48vw, 220px);
+    width: 100%;
+  }
+
+  .mca-mark {
+    width: clamp(145px, 42vw, 190px);
   }
 
   .terminal {
