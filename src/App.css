@@ -1,6 +1,6 @@
 .installation {
-  --phosphor-green: #57c33f;
-  --phosphor-bright: #65dc4b;
+  --phosphor-green: #70e85a;
+  --phosphor-bright: #83f768;
   --sculpture-width: min(62vw, 84vh);
   --sculpture-aspect: 1;
   --sculpture-region-left: 35vw;
@@ -10,6 +10,22 @@
   --noise-opacity: .02;
   --scanline-opacity: .42;
   --glitch-intensity: 0;
+  --signal-outline-opacity: 0;
+  --signal-shift-x: 0px;
+  --signal-shift-y: 0px;
+  --signal-skew: 0deg;
+  --signal-outline-shift-x: 0px;
+  --signal-outline-scale: 1;
+  --signal-contrast: 1;
+  --logo-shift-x: 0px;
+  --logo-shift-y: 0px;
+  --logo-skew: 0deg;
+  --logo-contrast: 1;
+  --logo-clip-top: 0%;
+  --logo-clip-bottom: 0%;
+  --object-filter-saturation: .1;
+  --object-filter-brightness: .85;
+  --object-blur: 0;
   position: relative;
   width: 100%;
   height: 100%;
@@ -23,7 +39,6 @@
   position: absolute;
   z-index: 3;
   inset: 0;
-  opacity: var(--object-opacity);
   filter: none;
   pointer-events: none;
 }
@@ -36,7 +51,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform: translateY(-50%);
+  transform:
+    translateY(-50%)
+    translate(var(--signal-shift-x), var(--signal-shift-y))
+    skewX(var(--signal-skew));
 }
 
 .signal-media-frame {
@@ -47,6 +65,8 @@
 }
 
 .signal-media {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
@@ -56,7 +76,44 @@
   user-select: none;
 }
 
-.signal-media--ready { opacity: 1; }
+.signal-media--primary {
+  filter:
+    saturate(var(--object-filter-saturation))
+    brightness(var(--object-filter-brightness))
+    blur(var(--object-blur))
+    contrast(var(--signal-contrast));
+}
+
+.signal-media--primary.signal-media--ready {
+  opacity: var(--object-opacity);
+}
+
+.signal-media--outline {
+  z-index: 2;
+  opacity: 0;
+  image-rendering: pixelated;
+  mix-blend-mode: screen;
+  filter: grayscale(1) sepia(1) saturate(9) hue-rotate(62deg) brightness(1.18) contrast(3.2);
+  mask-image: repeating-linear-gradient(
+    to bottom,
+    #000 0,
+    #000 7px,
+    transparent 7px,
+    transparent 12px,
+    #000 12px,
+    #000 14px,
+    transparent 14px,
+    transparent 23px
+  );
+  mask-size: 100% 31px;
+  transform:
+    translateX(var(--signal-outline-shift-x))
+    scale(var(--signal-outline-scale));
+}
+
+.signal-media--outline.signal-media--ready {
+  opacity: var(--signal-outline-opacity);
+}
 
 .mca-lockup {
   position: absolute;
@@ -71,11 +128,16 @@
   text-align: right;
   visibility: hidden;
   opacity: 0;
+  transform:
+    translate(var(--logo-shift-x), var(--logo-shift-y))
+    skewX(var(--logo-skew));
+  filter: contrast(var(--logo-contrast));
+  clip-path: inset(var(--logo-clip-top) 0 var(--logo-clip-bottom) 0);
 }
 
 .mca-lockup--visible {
   visibility: visible;
-  opacity: .65;
+  opacity: .78;
 }
 
 .mca-optical-filter {
@@ -102,19 +164,19 @@
 }
 
 .mca-logo--fill {
-  opacity: .24;
-  filter: brightness(.965);
+  opacity: .42;
+  filter: brightness(.985);
 }
 
 .mca-logo--rim {
-  opacity: .52;
+  opacity: .68;
   filter: url('#mca-optical-rim');
 }
 
 .mca-descriptor {
   width: 100%;
   margin: 0;
-  color: rgba(246, 246, 244, .74);
+  color: rgba(246, 246, 244, .82);
   font-size: clamp(.58rem, .53rem + .12vw, .7rem);
   font-weight: 300;
   line-height: 1.2;
@@ -278,7 +340,8 @@
 
   .terminal {
     left: 24px;
-    bottom: calc(32px + env(safe-area-inset-bottom));
+    top: calc(28px + env(safe-area-inset-top));
+    bottom: auto;
   }
 
   .contact {
@@ -299,4 +362,6 @@
   .crt__tear { animation: none; }
   .cursor { animation-duration: 1.8s; }
   .contact { transition-duration: .01ms; }
+  .identity-lockup { transform: translateY(-50%); }
+  .mca-lockup { transform: none; filter: none; clip-path: none; }
 }

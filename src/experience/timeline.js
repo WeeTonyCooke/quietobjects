@@ -41,6 +41,14 @@ export const TIMING = Object.freeze({
       [14, 1],
     ],
   },
+  signalRecovery: {
+    outlineStart: 4.15,
+    outlinePeak: 8.4,
+    outlineFade: 12.6,
+    outlineEnd: 18,
+    ruptureAt: 22.25,
+    ruptureDuration: 0.62,
+  },
   identityReveal: 20.8,
   divisionReveal: 21.5,
   contactAvailable: 20.8,
@@ -102,6 +110,19 @@ function integrityAt(elapsed) {
   return keyframes.at(-1)[1]
 }
 
+function ruptureAt(elapsed) {
+  const progress = (elapsed - TIMING.signalRecovery.ruptureAt)
+    / TIMING.signalRecovery.ruptureDuration
+
+  if (progress < 0 || progress >= 1) return { amount: 0, direction: 0 }
+  if (progress < 0.12) return { amount: 0.92, direction: -1 }
+  if (progress < 0.25) return { amount: 0.24, direction: 1 }
+  if (progress < 0.5) return { amount: 1, direction: 1 }
+  if (progress < 0.64) return { amount: 0.38, direction: -1 }
+  if (progress < 0.86) return { amount: 0.78, direction: -1 }
+  return { amount: 0.12, direction: 1 }
+}
+
 export function snapshotAt(
   elapsed,
   { contactElapsed = 0, contactRequested = false, reducedMotion = false } = {},
@@ -116,6 +137,18 @@ export function snapshotAt(
   const divisionVisible = time >= TIMING.divisionReveal
   const recovery = smoothstep(time, TIMING.states.SIGNAL, TIMING.states.STABLE)
   const settling = smoothstep(time, TIMING.states.RESOLVE, TIMING.states.HELLO)
+  const outlineBuild = smoothstep(
+    time,
+    TIMING.signalRecovery.outlineStart,
+    TIMING.signalRecovery.outlinePeak,
+  )
+  const outlineDecay = 1 - smoothstep(
+    time,
+    TIMING.signalRecovery.outlineFade,
+    TIMING.signalRecovery.outlineEnd,
+  )
+  const outline = reducedMotion ? 0 : outlineBuild * outlineDecay * (0.62 + integrityAt(time) * 0.38)
+  const rupture = reducedMotion ? { amount: 0, direction: 0 } : ruptureAt(time)
 
   return {
     elapsed: time,
@@ -137,6 +170,11 @@ export function snapshotAt(
       saturation: 0.03 + colour * 0.52,
       brightness: 0.38 + emergence * 0.45,
       blur: (1 - emergence) * 0.75,
+    },
+    signal: {
+      outline,
+      rupture: rupture.amount,
+      ruptureDirection: rupture.direction,
     },
     crt: {
       noise: reducedMotion ? 0.012 : 0.02 + recovery * 0.018 - settling * 0.008,
