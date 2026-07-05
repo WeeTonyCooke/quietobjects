@@ -8,7 +8,7 @@ export function LogoLockup({ visible, descriptorVisible }) {
         <filter id="mca-optical-rim" x="-5%" y="-10%" width="110%" height="120%" colorInterpolationFilters="sRGB">
           <feMorphology in="SourceAlpha" operator="dilate" radius="0.65" result="expanded" />
           <feComposite in="expanded" in2="SourceAlpha" operator="out" result="rim" />
-          <feFlood floodColor="#ebebeb" result="neutralWhite" />
+          <feFlood floodColor="#f6f6f4" result="neutralWhite" />
           <feComposite in="neutralWhite" in2="rim" operator="in" />
         </filter>
       </svg>

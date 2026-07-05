@@ -1,6 +1,6 @@
 .installation {
-  --phosphor-green: #5fbd68;
-  --phosphor-bright: #67c96f;
+  --phosphor-green: #57c33f;
+  --phosphor-bright: #65dc4b;
   --sculpture-width: min(62vw, 84vh);
   --sculpture-aspect: 1;
   --sculpture-region-left: 35vw;
@@ -64,9 +64,9 @@
   bottom: 16px;
   display: inline-flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
   gap: clamp(.55rem, 1.1vh, .75rem);
-  color: #ebebeb;
+  color: #f6f6f4;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   text-align: right;
   visibility: hidden;
@@ -102,8 +102,8 @@
 }
 
 .mca-logo--fill {
-  opacity: .2;
-  filter: brightness(.922);
+  opacity: .24;
+  filter: brightness(.965);
 }
 
 .mca-logo--rim {
@@ -112,12 +112,14 @@
 }
 
 .mca-descriptor {
+  width: 100%;
   margin: 0;
-  color: rgba(235, 235, 235, .68);
+  color: rgba(246, 246, 244, .74);
   font-size: clamp(.58rem, .53rem + .12vw, .7rem);
   font-weight: 300;
   line-height: 1.2;
   letter-spacing: .22em;
+  text-align: center;
   visibility: hidden;
 }
 
@@ -129,7 +131,7 @@
   position: absolute;
   z-index: 4;
   left: clamp(24px, 5vw, 78px);
-  top: clamp(28px, 5vh, 58px);
+  bottom: clamp(32px, 7vh, 82px);
   width: min(460px, calc(100vw - 48px));
   color: var(--phosphor-green);
   text-align: left;
@@ -276,7 +278,7 @@
 
   .terminal {
     left: 24px;
-    top: 28px;
+    bottom: calc(32px + env(safe-area-inset-bottom));
   }
 
   .contact {
