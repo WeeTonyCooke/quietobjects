@@ -1,16 +1,20 @@
-# React + Vite
+# Quiet Objects
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A full-screen digital installation built with React, Three.js, and a central recovery timeline.
 
-Currently, two official plugins are available:
+Before changing behaviour, pacing, interaction, or visual language, read [MANIFESTO.md](./MANIFESTO.md).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Run locally
 
-## React Compiler
+```bash
+npm install
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Open the local URL printed by Vite, usually `http://localhost:5173`.
 
-## Expanding the Oxlint configuration
+## Adjust pacing
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+All state boundaries, terminal message timings, typewriter speed, sculpture recovery, colour recovery, and contact availability live in `src/experience/timeline.js`.
+
+The contact email is currently the placeholder `hello@yourdomain.com` in `src/components/Terminal.jsx`.
