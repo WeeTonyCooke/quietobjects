@@ -39,12 +39,14 @@ function App() {
     '--screen-glitch-shift-inverse': `${experience.signal.screen * experience.signal.ruptureDirection * -13}px`,
     '--resolved-angle-shift-x': `${experience.signal.screen * experience.signal.ruptureDirection * 8}px`,
     '--resolved-angle-skew': `${experience.signal.rupture * experience.signal.ruptureDirection * 1.4}deg`,
+    '--glass-sweep-opacity': experience.object.glassSweep * 0.78,
+    '--glass-sweep-x': `${-52 + experience.object.glassSweepProgress * 138}%`,
     '--noise-opacity': experience.crt.noise,
     '--scanline-opacity': experience.crt.scanlines,
     '--glitch-intensity': experience.crt.glitches,
     '--signal-pixel-opacity': Math.min(
       1,
-      experience.signal.pixel * 0.84 + experience.signal.rupture * 0.42,
+      experience.signal.pixel * 0.46 + experience.signal.rupture * 0.24,
     ),
     '--signal-outline-opacity': Math.min(
       1,

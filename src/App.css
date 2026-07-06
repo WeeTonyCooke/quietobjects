@@ -19,6 +19,8 @@
   --screen-glitch-shift-inverse: 0px;
   --resolved-angle-shift-x: 0px;
   --resolved-angle-skew: 0deg;
+  --glass-sweep-opacity: 0;
+  --glass-sweep-x: -52%;
   --noise-opacity: .02;
   --scanline-opacity: .42;
   --glitch-intensity: 0;
@@ -156,6 +158,29 @@
 .signal-media--resolved-still {
   opacity: var(--resolved-still-opacity);
   transform: scale(1.004);
+}
+
+.signal-glass-sweep {
+  position: absolute;
+  z-index: 6;
+  inset: -8%;
+  opacity: var(--glass-sweep-opacity);
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background:
+    linear-gradient(
+      104deg,
+      transparent 0 42%,
+      rgba(255, 255, 255, .12) 44%,
+      rgba(255, 244, 120, .52) 46%,
+      rgba(85, 255, 218, .62) 48.5%,
+      rgba(245, 82, 255, .42) 51%,
+      rgba(255, 255, 255, .16) 53%,
+      transparent 56% 100%
+    );
+  filter: blur(.35px) saturate(1.35);
+  transform: translateX(var(--glass-sweep-x)) skewX(-8deg);
+  clip-path: ellipse(34% 48% at 50% 50%);
 }
 
 .signal-media--pixel,
@@ -744,6 +769,7 @@
   .crt__dropout,
   .crt__blocks,
   .crt__colour-bars,
+  .signal-glass-sweep,
   .mca-lockup--visible .mca-edge-calibration,
   .mca-lockup--visible .mca-edge-trace,
   .mca-lockup--visible .mca-edge-hit,
