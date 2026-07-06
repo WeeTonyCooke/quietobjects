@@ -24,20 +24,15 @@ export function LogoLockup({ visible, descriptorVisible, calibrating }) {
           aria-hidden="true"
           className="mca-logo mca-logo--rim"
         />
-        <span className="mca-edge-calibration" aria-hidden="true">
-          <img
-            src="/assets/mca-logo-white@3x.png"
-            alt=""
-            aria-hidden="true"
-            className="mca-edge-logo-mask"
-          />
-          <span className="mca-edge-trace mca-edge-trace--a" />
-          <span className="mca-edge-trace mca-edge-trace--c" />
-          <span className="mca-edge-trace mca-edge-trace--tail" />
-          <span className="mca-edge-trace mca-edge-trace--base" />
-          <span className="mca-edge-hit mca-edge-hit--start" />
-          <span className="mca-edge-hit mca-edge-hit--end" />
-        </span>
+        <img
+          src="/assets/mca-logo-white@3x.png"
+          alt=""
+          aria-hidden="true"
+          className="mca-logo mca-stage mca-stage--edge"
+        />
+        <span className="mca-stage mca-stage--residue" aria-hidden="true" />
+        <span className="mca-stage mca-stage--dispersion" aria-hidden="true" />
+        <span className="mca-stage mca-stage--refraction" aria-hidden="true" />
       </span>
       <p className={`mca-descriptor ${descriptorVisible ? 'mca-descriptor--visible' : ''}`}>
         Applied Signal Research

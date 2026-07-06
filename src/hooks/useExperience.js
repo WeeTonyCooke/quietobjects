@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { snapshotAt, TIMELINE_END } from '../experience/timeline'
+import { snapshotAt, TIMELINE_END, TIMING } from '../experience/timeline'
 
 const RECOVERY_SEEN_KEY = 'quiet-objects:recovery-seen'
 
@@ -49,7 +49,9 @@ export function useExperience(reducedMotion) {
     let frame
 
     const update = (now) => {
-      const elapsed = reducedMotion ? TIMELINE_END : (now - startedAt) / 1000
+      const elapsed = reducedMotion
+        ? TIMELINE_END
+        : ((now - startedAt) / 1000) * TIMING.playbackRate
       const contactElapsed = contactStartedAt.current
         ? (now - contactStartedAt.current) / 1000
         : 0

@@ -1,17 +1,18 @@
 export const TIMING = Object.freeze({
+  playbackRate: 1.47,
   states: {
     VOID: 0,
     SIGNAL: 1,
     RECOVER: 7,
     RESOLVE: 13,
     STABLE: 16.65,
-    HELLO: 33.4,
+    HELLO: 36.35,
   },
   messages: [
     { at: 1, text: 'signal detected.....' },
     { at: 7, text: 'recovering geometry....' },
     { at: 13, text: 'recovering chroma....' },
-    { at: 33.4, text: 'hello....' },
+    { at: 36.35, text: 'hello....' },
   ],
   typewriter: {
     characterSeconds: 0.072,
@@ -91,8 +92,8 @@ export const TIMING = Object.freeze({
   },
   identityReveal: 29.35,
   divisionReveal: 29.99,
-  identityCalibrationEnd: 32.9,
-  contactAvailable: 34.8,
+  identityCalibrationEnd: 36.2,
+  contactAvailable: 37.75,
   contactRevealDelay: 0.75,
 })
 
@@ -299,4 +300,4 @@ export function snapshotAt(
   }
 }
 
-export const TIMELINE_END = 37
+export const TIMELINE_END = 40
