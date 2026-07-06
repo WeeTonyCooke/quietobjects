@@ -20,8 +20,9 @@
   --screen-glitch-shift-inverse: 0px;
   --resolved-angle-shift-x: 0px;
   --resolved-angle-skew: 0deg;
-  --glass-sweep-opacity: 0;
-  --glass-sweep-x: -52%;
+  --glitch-band-one-y: 62%;
+  --glitch-band-two-y: 72%;
+  --glitch-grid-shift: 0px;
   --noise-opacity: .02;
   --scanline-opacity: .42;
   --glitch-intensity: 0;
@@ -163,29 +164,6 @@
 .signal-media--resolved-still {
   opacity: var(--resolved-still-opacity);
   transform: scale(1.004);
-}
-
-.signal-glass-sweep {
-  position: absolute;
-  z-index: 6;
-  inset: -8%;
-  opacity: var(--glass-sweep-opacity);
-  pointer-events: none;
-  mix-blend-mode: screen;
-  background:
-    linear-gradient(
-      104deg,
-      transparent 0 42%,
-      rgba(255, 255, 255, .12) 44%,
-      rgba(255, 244, 120, .52) 46%,
-      rgba(85, 255, 218, .62) 48.5%,
-      rgba(245, 82, 255, .42) 51%,
-      rgba(255, 255, 255, .16) 53%,
-      transparent 56% 100%
-    );
-  filter: blur(.35px) saturate(1.35);
-  transform: translateX(var(--glass-sweep-x)) skewX(-8deg);
-  clip-path: ellipse(34% 48% at 50% 50%);
 }
 
 .signal-media--pixel,
@@ -335,7 +313,7 @@
   pointer-events: none;
 }
 
-.mca-lockup--visible .mca-edge-calibration {
+.mca-lockup--calibrating .mca-edge-calibration {
   animation: mca-calibration-presence 2.75s 2.05s linear both;
 }
 
@@ -355,7 +333,7 @@
   mix-blend-mode: screen;
 }
 
-.mca-lockup--visible .mca-edge-logo-mask {
+.mca-lockup--calibrating .mca-edge-logo-mask {
   animation: mca-logo-mask-sweep 2.5s 2.18s steps(1) both;
 }
 
@@ -414,19 +392,19 @@
   transform: rotate(0deg) scaleX(0);
 }
 
-.mca-lockup--visible .mca-edge-trace--a {
+.mca-lockup--calibrating .mca-edge-trace--a {
   animation: mca-trace-a 2.5s 2.18s steps(1) both;
 }
 
-.mca-lockup--visible .mca-edge-trace--c {
+.mca-lockup--calibrating .mca-edge-trace--c {
   animation: mca-trace-c 2.5s 2.18s steps(1) both;
 }
 
-.mca-lockup--visible .mca-edge-trace--tail {
+.mca-lockup--calibrating .mca-edge-trace--tail {
   animation: mca-trace-tail 2.5s 2.18s steps(1) both;
 }
 
-.mca-lockup--visible .mca-edge-trace--base {
+.mca-lockup--calibrating .mca-edge-trace--base {
   animation: mca-trace-base 2.5s 2.18s steps(1) both;
 }
 
@@ -470,11 +448,11 @@
   bottom: 19%;
 }
 
-.mca-lockup--visible .mca-edge-hit--start {
+.mca-lockup--calibrating .mca-edge-hit--start {
   animation: mca-hit-start 2.75s 2.05s steps(1) both;
 }
 
-.mca-lockup--visible .mca-edge-hit--end {
+.mca-lockup--calibrating .mca-edge-hit--end {
   animation: mca-hit-end 2.75s 2.05s steps(1) both;
 }
 
@@ -576,7 +554,6 @@
 .crt__noise,
 .crt__dropout,
 .crt__blocks,
-.crt__colour-bars,
 .crt__vignette {
   position: absolute;
   inset: 0;
@@ -616,30 +593,12 @@
 .crt__blocks {
   opacity: calc(var(--screen-glitch-opacity) * .82);
   background:
-    linear-gradient(90deg, transparent 0 12%, rgba(0, 255, 95, .34) 12% 36%, transparent 36% 100%) 0 62% / 100% 4.5% no-repeat,
-    linear-gradient(90deg, transparent 0 51%, rgba(255, 0, 186, .24) 51% 61%, rgba(0, 243, 255, .24) 61% 74%, transparent 74% 100%) 0 72% / 100% 8% no-repeat,
+    linear-gradient(90deg, transparent 0 12%, rgba(0, 255, 95, .34) 12% 36%, transparent 36% 100%) 0 var(--glitch-band-one-y) / 100% 4.5% no-repeat,
+    linear-gradient(90deg, transparent 0 51%, rgba(255, 0, 186, .24) 51% 61%, rgba(0, 243, 255, .24) 61% 74%, transparent 74% 100%) 0 var(--glitch-band-two-y) / 100% 8% no-repeat,
     repeating-linear-gradient(to right, transparent 0 18px, rgba(110, 255, 86, .18) 18px 22px, transparent 22px 44px);
   mix-blend-mode: screen;
-  transform: translateX(var(--screen-glitch-shift-inverse));
+  transform: translateX(calc(var(--screen-glitch-shift-inverse) + var(--glitch-grid-shift)));
   animation: block-fault .24s steps(1) infinite;
-}
-
-.crt__colour-bars {
-  opacity: 0;
-  background:
-    linear-gradient(
-      90deg,
-      #fff500 0 13%,
-      #6ed7d2 13% 26%,
-      #4cc241 26% 39%,
-      #f13aa0 39% 52%,
-      #ec191f 52% 65%,
-      #1628ff 65% 78%,
-      #30ff69 78% 100%
-    );
-  clip-path: inset(6% 12% 78% 18% round 8px);
-  mix-blend-mode: screen;
-  animation: colour-bar-fault .31s steps(1) infinite;
 }
 
 .crt__vignette {
@@ -678,17 +637,10 @@
 }
 
 @keyframes block-fault {
-  0%, 42% { background-position: 0 62%, 0 72%, 0 0; }
-  43%, 63% { background-position: -38px 56%, 21px 77%, 11px 0; }
-  64%, 81% { background-position: 24px 68%, -16px 69%, -17px 0; }
-  82%, 100% { background-position: 0 62%, 0 72%, 0 0; }
-}
-
-@keyframes colour-bar-fault {
-  0%, 66% { clip-path: inset(6% 12% 78% 18% round 8px); transform: translateX(0); }
-  67%, 76% { clip-path: inset(11% 38% 74% 6% round 4px); transform: translateX(-18px); }
-  77%, 86% { clip-path: inset(4% 5% 82% 54% round 4px); transform: translateX(24px); }
-  87%, 100% { clip-path: inset(6% 12% 78% 18% round 8px); transform: translateX(0); }
+  0%, 42% { background-position: 0 var(--glitch-band-one-y), 0 var(--glitch-band-two-y), 0 0; }
+  43%, 63% { background-position: -38px calc(var(--glitch-band-one-y) - 6%), 21px calc(var(--glitch-band-two-y) + 5%), 11px 0; }
+  64%, 81% { background-position: 24px calc(var(--glitch-band-one-y) + 6%), -16px calc(var(--glitch-band-two-y) - 3%), -17px 0; }
+  82%, 100% { background-position: 0 var(--glitch-band-one-y), 0 var(--glitch-band-two-y), 0 0; }
 }
 
 @keyframes phosphor-pixel-breakup {
@@ -832,11 +784,9 @@
   .crt__tear,
   .crt__dropout,
   .crt__blocks,
-  .crt__colour-bars,
-  .signal-glass-sweep,
-  .mca-lockup--visible .mca-edge-calibration,
-  .mca-lockup--visible .mca-edge-trace,
-  .mca-lockup--visible .mca-edge-hit,
+  .mca-lockup--calibrating .mca-edge-calibration,
+  .mca-lockup--calibrating .mca-edge-trace,
+  .mca-lockup--calibrating .mca-edge-hit,
   .signal-media--pixel,
   .signal-media--outline,
   .signal-media--colour-pixel { animation: none; }

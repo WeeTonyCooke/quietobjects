@@ -1,7 +1,7 @@
-export function LogoLockup({ visible, descriptorVisible }) {
+export function LogoLockup({ visible, descriptorVisible, calibrating }) {
   return (
     <header
-      className={`mca-lockup ${visible ? 'mca-lockup--visible' : ''}`}
+      className={`mca-lockup ${visible ? 'mca-lockup--visible' : ''} ${calibrating ? 'mca-lockup--calibrating' : ''}`}
       aria-label="MCA Applied Signal Research"
     >
       <svg className="mca-optical-filter" aria-hidden="true">

@@ -1,10 +1,29 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { snapshotAt, TIMELINE_END } from '../experience/timeline'
 
+const RECOVERY_SEEN_KEY = 'quiet-objects:recovery-seen'
+
+function hasSeenRecovery() {
+  try {
+    return window.localStorage.getItem(RECOVERY_SEEN_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
+function rememberRecovery() {
+  try {
+    window.localStorage.setItem(RECOVERY_SEEN_KEY, '1')
+  } catch {
+    // Storage can be unavailable in private browsing; the experience still works.
+  }
+}
+
 export function useExperience(reducedMotion) {
+  const skipIntro = useRef(reducedMotion || hasSeenRecovery())
   const contactRequested = useRef(false)
   const contactStartedAt = useRef(null)
-  const latest = useRef(snapshotAt(0, { reducedMotion }))
+  const latest = useRef(snapshotAt(skipIntro.current ? TIMELINE_END : 0, { reducedMotion }))
   const [experience, setExperience] = useState(latest.current)
   const [contactRun, setContactRun] = useState(0)
   const contactChoreographySeconds = 4.2
@@ -24,6 +43,8 @@ export function useExperience(reducedMotion) {
   }, [reducedMotion])
 
   useEffect(() => {
+    if (skipIntro.current) return undefined
+
     const startedAt = performance.now()
     let frame
 
@@ -43,7 +64,11 @@ export function useExperience(reducedMotion) {
       latest.current = next
       setExperience(next)
 
-      if (!reducedMotion && elapsed < TIMELINE_END) frame = requestAnimationFrame(update)
+      if (!reducedMotion && elapsed < TIMELINE_END) {
+        frame = requestAnimationFrame(update)
+      } else {
+        rememberRecovery()
+      }
     }
 
     frame = requestAnimationFrame(update)

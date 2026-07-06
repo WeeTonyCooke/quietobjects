@@ -158,13 +158,13 @@ export function SignalArtwork({ experience, reducedMotion }) {
             aria-hidden="true"
             className="signal-media signal-media--resolved-still"
           />
-          <span className="signal-glass-sweep" aria-hidden="true" />
         </div>
 
       </div>
       <LogoLockup
         visible={experience.identityVisible}
         descriptorVisible={experience.divisionVisible}
+        calibrating={experience.identityCalibrating}
       />
     </div>
   )

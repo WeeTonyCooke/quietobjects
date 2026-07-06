@@ -3,15 +3,15 @@ export const TIMING = Object.freeze({
     VOID: 0,
     SIGNAL: 1,
     RECOVER: 7,
-    RESOLVE: 14,
-    STABLE: 18,
-    HELLO: 36.4,
+    RESOLVE: 13,
+    STABLE: 16.65,
+    HELLO: 33.4,
   },
   messages: [
     { at: 1, text: 'signal detected.....' },
     { at: 7, text: 'recovering geometry....' },
-    { at: 14, text: 'recovering chroma....' },
-    { at: 36.4, text: 'hello....' },
+    { at: 13, text: 'recovering chroma....' },
+    { at: 33.4, text: 'hello....' },
   ],
   typewriter: {
     characterSeconds: 0.072,
@@ -19,22 +19,20 @@ export const TIMING = Object.freeze({
   },
   object: {
     emergeStart: 7,
-    emergeEnd: 19,
-    colourStart: 14,
-    colourEnd: 22.35,
+    emergeEnd: 17.55,
+    colourStart: 13,
+    colourEnd: 20.6,
     angleWindows: [
-      [23.7, 24.05],
-      [24.2, 24.58],
-      [24.75, 25.1],
-      [25.25, 25.62],
-      [25.78, 26.14],
-      [26.32, 26.68],
-      [26.85, 27.2],
+      [21.84, 22.15],
+      [22.29, 22.64],
+      [22.79, 23.11],
+      [23.25, 23.59],
+      [23.73, 24.05],
+      [24.22, 24.55],
+      [24.7, 25.02],
     ],
-    stillStart: 27.42,
-    stillEnd: 27.68,
-    glassSweepStart: 28,
-    glassSweepEnd: 31.2,
+    stillStart: 25.22,
+    stillEnd: 25.46,
     maximumOpacity: 0.92,
     integrity: [
       [7, 0],
@@ -44,45 +42,45 @@ export const TIMING = Object.freeze({
       [9.4, 0.1],
       [9.6, 0.3],
       [9.75, 0.06],
-      [14.2, 0.25],
-      [14.45, 0.5],
-      [14.7, 0.18],
-      [16.5, 0.52],
-      [18.5, 0.78],
-      [19, 1],
+      [13.18, 0.25],
+      [13.41, 0.5],
+      [13.64, 0.18],
+      [15.28, 0.52],
+      [17.1, 0.78],
+      [17.55, 1],
     ],
   },
   signalRecovery: {
     pixelStart: 1.15,
     pixelPeak: 4.6,
-    pixelFade: 7.4,
-    pixelEnd: 10.4,
+    pixelFade: 7.34,
+    pixelEnd: 9.91,
     lineStart: 7,
-    linePeak: 10.8,
-    lineFade: 15.8,
-    lineEnd: 22.2,
-    colourPixelStart: 13.85,
-    colourPixelPeak: 17.4,
-    colourPixelFade: 21.2,
-    colourPixelEnd: 24.4,
+    linePeak: 10.26,
+    lineFade: 14.64,
+    lineEnd: 20.47,
+    colourPixelStart: 12.85,
+    colourPixelPeak: 16.1,
+    colourPixelFade: 19.56,
+    colourPixelEnd: 22.47,
     faults: [
       { at: 1.85, duration: 0.18, amount: 0.26, direction: -1 },
       { at: 3.35, duration: 0.12, amount: 0.14, direction: 1 },
-      { at: 7.55, duration: 0.28, amount: 0.48, direction: 1 },
-      { at: 8.3, duration: 0.16, amount: 0.32, direction: -1 },
-      { at: 14.35, duration: 0.38, amount: 0.68, direction: -1 },
-      { at: 16.2, duration: 0.2, amount: 0.38, direction: 1 },
-      { at: 22.25, duration: 0.58, amount: 1, direction: 1 },
-      { at: 23.48, duration: 0.22, amount: 0.55, direction: -1, screen: 0.74 },
-      { at: 24.22, duration: 0.18, amount: 0.42, direction: -1, screen: 0.55 },
-      { at: 24.78, duration: 0.14, amount: 0.46, direction: 1, screen: 0.58 },
-      { at: 25.28, duration: 0.16, amount: 0.5, direction: -1, screen: 0.62 },
-      { at: 25.78, duration: 0.14, amount: 0.52, direction: 1, screen: 0.66 },
-      { at: 26.25, duration: 0.16, amount: 0.5, direction: -1, screen: 0.64 },
-      { at: 26.72, duration: 0.18, amount: 0.56, direction: 1, screen: 0.7 },
-      { at: 27.28, duration: 0.32, amount: 0.88, direction: -1, screen: 0.95 },
-      { at: 29.4, duration: 0.18, amount: 0.34, direction: 1, screen: 0.28 },
-      { at: 33.15, duration: 0.24, amount: 0.62, direction: -1, screen: 0.48 },
+      { at: 7.47, duration: 0.28, amount: 0.48, direction: 1 },
+      { at: 8.11, duration: 0.16, amount: 0.32, direction: -1 },
+      { at: 13.32, duration: 0.38, amount: 0.68, direction: -1 },
+      { at: 15, duration: 0.2, amount: 0.38, direction: 1 },
+      { at: 20.51, duration: 0.58, amount: 1, direction: 1 },
+      { at: 21.64, duration: 0.22, amount: 0.55, direction: -1, screen: 0.74 },
+      { at: 22.31, duration: 0.18, amount: 0.42, direction: -1, screen: 0.55 },
+      { at: 22.82, duration: 0.14, amount: 0.46, direction: 1, screen: 0.58 },
+      { at: 23.28, duration: 0.16, amount: 0.5, direction: -1, screen: 0.62 },
+      { at: 23.73, duration: 0.14, amount: 0.52, direction: 1, screen: 0.66 },
+      { at: 24.16, duration: 0.16, amount: 0.5, direction: -1, screen: 0.64 },
+      { at: 24.58, duration: 0.18, amount: 0.56, direction: 1, screen: 0.7 },
+      { at: 25.09, duration: 0.32, amount: 0.88, direction: -1, screen: 0.95 },
+      { at: 27.03, duration: 0.18, amount: 0.34, direction: 1, screen: 0.28 },
+      { at: 30.44, duration: 0.24, amount: 0.62, direction: -1, screen: 0.48 },
     ],
     contactFaults: [
       { at: 0.25, duration: 0.18, amount: 0.42, direction: 1 },
@@ -91,9 +89,10 @@ export const TIMING = Object.freeze({
       { at: 3.15, duration: 0.24, amount: 0.52, direction: 1 },
     ],
   },
-  identityReveal: 31.95,
-  divisionReveal: 32.65,
-  contactAvailable: 37.8,
+  identityReveal: 29.35,
+  divisionReveal: 29.99,
+  identityCalibrationEnd: 32.9,
+  contactAvailable: 34.8,
   contactRevealDelay: 0.75,
 })
 
@@ -173,7 +172,7 @@ function ruptureAt(elapsed, contactElapsed = 0, contactSequenceStarted = false) 
   }
 
   return events.reduce(
-    (strongest, fault) => {
+    (strongest, fault, index) => {
       const progress = (elapsed - fault.at) / fault.duration
       const shaped = faultShape(progress)
       const amount = shaped.amount * fault.amount
@@ -184,9 +183,10 @@ function ruptureAt(elapsed, contactElapsed = 0, contactSequenceStarted = false) 
         amount: Math.max(strongest.amount, amount),
         direction: shaped.direction * fault.direction,
         screen: Math.max(strongest.screen, screenAmount),
+        variant: (index * 37 + 11) % 97,
       }
     },
-    { amount: 0, direction: 0, screen: 0 },
+    { amount: 0, direction: 0, screen: 0, variant: 0 },
   )
 }
 
@@ -211,18 +211,14 @@ export function snapshotAt(
     reducedMotion ? 0 : steppedWindow(time, start, end)
   ))
   const still = smoothstep(time, TIMING.object.stillStart, TIMING.object.stillEnd)
-  const glassSweep = reducedMotion
-    ? 0
-    : steppedWindow(time, TIMING.object.glassSweepStart, TIMING.object.glassSweepEnd)
-  const glassSweepProgress = clamp(
-    (time - TIMING.object.glassSweepStart)
-    / (TIMING.object.glassSweepEnd - TIMING.object.glassSweepStart),
-  )
   const contactAvailable = time >= TIMING.contactAvailable
   const contactSequenceStarted = contactAvailable && contactRequested
   const contactVisible = contactSequenceStarted && contactElapsed >= TIMING.contactRevealDelay
   const identityVisible = time >= TIMING.identityReveal
   const divisionVisible = time >= TIMING.divisionReveal
+  const identityCalibrating = !reducedMotion
+    && time >= TIMING.identityReveal
+    && time < TIMING.identityCalibrationEnd
   const recovery = smoothstep(time, TIMING.states.SIGNAL, TIMING.states.STABLE)
   const settling = smoothstep(time, TIMING.states.RESOLVE, TIMING.states.HELLO)
   const outlineBuild = smoothstep(
@@ -275,6 +271,7 @@ export function snapshotAt(
     diagnosticVisible: !contactSequenceStarted,
     identityVisible,
     divisionVisible,
+    identityCalibrating,
     object: {
       emergence,
       colour,
@@ -284,8 +281,6 @@ export function snapshotAt(
       blur: (1 - emergence) * 0.75,
       angles,
       still,
-      glassSweep,
-      glassSweepProgress,
     },
     signal: {
       pixel,
@@ -294,6 +289,7 @@ export function snapshotAt(
       rupture: rupture.amount,
       ruptureDirection: rupture.direction,
       screen: rupture.screen,
+      variant: rupture.variant,
     },
     crt: {
       noise: reducedMotion ? 0.012 : 0.02 + recovery * 0.018 - settling * 0.008,
@@ -303,4 +299,4 @@ export function snapshotAt(
   }
 }
 
-export const TIMELINE_END = 40
+export const TIMELINE_END = 37
