@@ -99,40 +99,46 @@ export function SignalArtwork({ experience, reducedMotion }) {
             <source src="/assets/signal.mp4" type="video/mp4" />
           </video>
           <img
-            src="/assets/resolved-angle-45.png"
+            src="/assets/signal-match-frame.png"
             alt=""
             aria-hidden="true"
             className="signal-media signal-media--resolved-angle signal-media--resolved-angle-one"
           />
           <img
-            src="/assets/resolved-angle-90.png"
+            src="/assets/resolved-angle-0.png"
             alt=""
             aria-hidden="true"
             className="signal-media signal-media--resolved-angle signal-media--resolved-angle-two"
           />
           <img
-            src="/assets/resolved-angle-135.png"
+            src="/assets/resolved-angle-45.png"
             alt=""
             aria-hidden="true"
             className="signal-media signal-media--resolved-angle signal-media--resolved-angle-three"
           />
           <img
-            src="/assets/resolved-angle-180.png"
+            src="/assets/resolved-angle-90.png"
             alt=""
             aria-hidden="true"
             className="signal-media signal-media--resolved-angle signal-media--resolved-angle-four"
           />
           <img
-            src="/assets/resolved-angle-225.png"
+            src="/assets/resolved-angle-135.png"
             alt=""
             aria-hidden="true"
             className="signal-media signal-media--resolved-angle signal-media--resolved-angle-five"
           />
           <img
-            src="/assets/resolved-angle-270.png"
+            src="/assets/resolved-angle-225.png"
             alt=""
             aria-hidden="true"
             className="signal-media signal-media--resolved-angle signal-media--resolved-angle-six"
+          />
+          <img
+            src="/assets/resolved-angle-270.png"
+            alt=""
+            aria-hidden="true"
+            className="signal-media signal-media--resolved-angle signal-media--resolved-angle-seven"
           />
           <img
             src="/assets/resolved-signal.png"

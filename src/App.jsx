@@ -23,7 +23,15 @@ function App() {
     }
   }, [reducedMotion, revealContact])
 
-  const [angleOne, angleTwo, angleThree, angleFour, angleFive, angleSix] = experience.object.angles
+  const [
+    angleOne,
+    angleTwo,
+    angleThree,
+    angleFour,
+    angleFive,
+    angleSix,
+    angleSeven,
+  ] = experience.object.angles
 
   const variables = {
     '--object-opacity': experience.object.opacity * (1 - experience.object.still),
@@ -33,6 +41,7 @@ function App() {
     '--resolved-angle-four-opacity': angleFour * 0.92,
     '--resolved-angle-five-opacity': angleFive * 0.92,
     '--resolved-angle-six-opacity': angleSix * 0.92,
+    '--resolved-angle-seven-opacity': angleSeven * 0.92,
     '--resolved-still-opacity': experience.object.still * 0.96,
     '--screen-glitch-opacity': Math.min(1, experience.signal.screen * 0.86),
     '--screen-glitch-shift': `${experience.signal.screen * experience.signal.ruptureDirection * 22}px`,

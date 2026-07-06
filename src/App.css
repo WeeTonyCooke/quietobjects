@@ -13,6 +13,7 @@
   --resolved-angle-four-opacity: 0;
   --resolved-angle-five-opacity: 0;
   --resolved-angle-six-opacity: 0;
+  --resolved-angle-seven-opacity: 0;
   --resolved-still-opacity: 0;
   --screen-glitch-opacity: 0;
   --screen-glitch-shift: 0px;
@@ -153,6 +154,10 @@
 
 .signal-media--resolved-angle-six {
   opacity: var(--resolved-angle-six-opacity);
+}
+
+.signal-media--resolved-angle-seven {
+  opacity: var(--resolved-angle-seven-opacity);
 }
 
 .signal-media--resolved-still {
@@ -382,6 +387,13 @@
   transform: rotate(64deg) scaleX(0);
 }
 
+.mca-edge-trace--base {
+  right: 3%;
+  bottom: 18%;
+  width: 32%;
+  transform: rotate(0deg) scaleX(0);
+}
+
 .mca-lockup--visible .mca-edge-trace--a {
   animation: mca-trace-a 2.5s 2.18s steps(1) both;
 }
@@ -392,6 +404,10 @@
 
 .mca-lockup--visible .mca-edge-trace--tail {
   animation: mca-trace-tail 2.5s 2.18s steps(1) both;
+}
+
+.mca-lockup--visible .mca-edge-trace--base {
+  animation: mca-trace-base 2.5s 2.18s steps(1) both;
 }
 
 .mca-edge-hit {
@@ -414,6 +430,14 @@
 
 .mca-edge-hit::after {
   inset: -9px 2px;
+}
+
+.mca-edge-hit--end::before {
+  inset: 2px -15px;
+}
+
+.mca-edge-hit--end::after {
+  inset: -15px 2px;
 }
 
 .mca-edge-hit--start {
@@ -701,6 +725,14 @@
   63%, 70% { opacity: .2; transform: rotate(64deg) translateX(5px) scaleX(.28); }
   71%, 78% { opacity: .9; transform: rotate(64deg) scaleX(.96); }
   79%, 100% { opacity: 0; transform: rotate(64deg) scaleX(.98); }
+}
+
+@keyframes mca-trace-base {
+  0%, 58% { opacity: 0; transform: rotate(0deg) scaleX(0); }
+  59%, 68% { opacity: .54; transform: rotate(0deg) translateX(-3px) scaleX(.42); }
+  69%, 76% { opacity: .16; transform: rotate(0deg) translateX(6px) scaleX(.2); }
+  77%, 84% { opacity: .86; transform: rotate(0deg) scaleX(.94); }
+  85%, 100% { opacity: 0; transform: rotate(0deg) scaleX(.98); }
 }
 
 @keyframes mca-hit-start {

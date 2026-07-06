@@ -28,6 +28,7 @@ export function LogoLockup({ visible, descriptorVisible }) {
           <span className="mca-edge-trace mca-edge-trace--a" />
           <span className="mca-edge-trace mca-edge-trace--c" />
           <span className="mca-edge-trace mca-edge-trace--tail" />
+          <span className="mca-edge-trace mca-edge-trace--base" />
           <span className="mca-edge-hit mca-edge-hit--start" />
           <span className="mca-edge-hit mca-edge-hit--end" />
         </span>
