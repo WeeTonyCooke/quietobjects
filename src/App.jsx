@@ -24,7 +24,8 @@ function App() {
   }, [reducedMotion, revealContact])
 
   const variables = {
-    '--object-opacity': experience.object.opacity,
+    '--object-opacity': experience.object.opacity * (1 - experience.object.still * 0.72),
+    '--resolved-still-opacity': experience.object.still * 0.96,
     '--noise-opacity': experience.crt.noise,
     '--scanline-opacity': experience.crt.scanlines,
     '--glitch-intensity': experience.crt.glitches,

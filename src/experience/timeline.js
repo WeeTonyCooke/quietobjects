@@ -22,6 +22,8 @@ export const TIMING = Object.freeze({
     emergeEnd: 14,
     colourStart: 8,
     colourEnd: 16.35,
+    stillStart: 16.55,
+    stillEnd: 18.2,
     maximumOpacity: 0.92,
     integrity: [
       [4, 0],
@@ -53,16 +55,21 @@ export const TIMING = Object.freeze({
     colourPixelFade: 15.2,
     colourPixelEnd: 18.4,
     faults: [
-      { at: 1.85, duration: 0.34, amount: 0.32, direction: -1 },
-      { at: 4.55, duration: 0.52, amount: 0.56, direction: 1 },
-      { at: 8.35, duration: 0.7, amount: 0.74, direction: -1 },
-      { at: 16.25, duration: 0.82, amount: 1, direction: 1 },
-      { at: 22.25, duration: 0.62, amount: 0.78, direction: -1 },
+      { at: 1.85, duration: 0.18, amount: 0.26, direction: -1 },
+      { at: 2.35, duration: 0.12, amount: 0.18, direction: 1 },
+      { at: 4.55, duration: 0.28, amount: 0.48, direction: 1 },
+      { at: 5.3, duration: 0.16, amount: 0.32, direction: -1 },
+      { at: 8.35, duration: 0.38, amount: 0.68, direction: -1 },
+      { at: 10.2, duration: 0.2, amount: 0.38, direction: 1 },
+      { at: 16.25, duration: 0.58, amount: 1, direction: 1 },
+      { at: 17.45, duration: 0.22, amount: 0.42, direction: -1 },
+      { at: 22.25, duration: 0.36, amount: 0.74, direction: -1 },
     ],
     contactFaults: [
-      { at: 0.25, duration: 0.36, amount: 0.46, direction: 1 },
-      { at: 1.15, duration: 0.68, amount: 0.72, direction: -1 },
-      { at: 3.15, duration: 0.5, amount: 0.54, direction: 1 },
+      { at: 0.25, duration: 0.18, amount: 0.42, direction: 1 },
+      { at: 1.15, duration: 0.32, amount: 0.72, direction: -1 },
+      { at: 2.05, duration: 0.14, amount: 0.28, direction: 1 },
+      { at: 3.15, duration: 0.24, amount: 0.52, direction: 1 },
     ],
   },
   identityReveal: 20.8,
@@ -128,12 +135,13 @@ function integrityAt(elapsed) {
 
 function faultShape(progress) {
   if (progress < 0 || progress >= 1) return { amount: 0, direction: 0 }
-  if (progress < 0.12) return { amount: 0.92, direction: -1 }
-  if (progress < 0.25) return { amount: 0.24, direction: 1 }
-  if (progress < 0.5) return { amount: 1, direction: 1 }
-  if (progress < 0.64) return { amount: 0.38, direction: -1 }
-  if (progress < 0.86) return { amount: 0.78, direction: -1 }
-  return { amount: 0.12, direction: 1 }
+  if (progress < 0.16) return { amount: 0.96, direction: -1 }
+  if (progress < 0.28) return { amount: 0.18, direction: 1 }
+  if (progress < 0.46) return { amount: 1, direction: 1 }
+  if (progress < 0.58) return { amount: 0.34, direction: -1 }
+  if (progress < 0.78) return { amount: 0.82, direction: -1 }
+  if (progress < 0.88) return { amount: 0.08, direction: 1 }
+  return { amount: 0.46, direction: -1 }
 }
 
 function ruptureAt(elapsed, contactElapsed = 0, contactSequenceStarted = false) {
@@ -168,6 +176,7 @@ export function snapshotAt(
   const time = reducedMotion ? 24.5 : Math.max(0, elapsed)
   const emergence = smoothstep(time, TIMING.object.emergeStart, TIMING.object.emergeEnd)
   const colour = smoothstep(time, TIMING.object.colourStart, TIMING.object.colourEnd)
+  const still = smoothstep(time, TIMING.object.stillStart, TIMING.object.stillEnd)
   const contactAvailable = time >= TIMING.contactAvailable
   const contactSequenceStarted = contactAvailable && contactRequested
   const contactVisible = contactSequenceStarted && contactElapsed >= TIMING.contactRevealDelay
@@ -232,6 +241,7 @@ export function snapshotAt(
       saturation: 0.03 + colour * 0.52,
       brightness: 0.38 + emergence * 0.45,
       blur: (1 - emergence) * 0.75,
+      still,
     },
     signal: {
       pixel,

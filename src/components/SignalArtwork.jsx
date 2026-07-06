@@ -98,6 +98,12 @@ export function SignalArtwork({ experience, reducedMotion }) {
             <source src="/assets/signal.webm" type="video/webm" />
             <source src="/assets/signal.mp4" type="video/mp4" />
           </video>
+          <img
+            src="/assets/resolved-signal.png"
+            alt=""
+            aria-hidden="true"
+            className="signal-media signal-media--resolved-still"
+          />
         </div>
 
       </div>

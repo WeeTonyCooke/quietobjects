@@ -7,6 +7,7 @@
   --sculpture-region-right: 0vw;
   --sculpture-y: 48%;
   --object-opacity: 0;
+  --resolved-still-opacity: 0;
   --noise-opacity: .02;
   --scanline-opacity: .42;
   --glitch-intensity: 0;
@@ -93,6 +94,17 @@
   opacity: var(--object-opacity);
 }
 
+.signal-media--resolved-still {
+  z-index: 4;
+  opacity: var(--resolved-still-opacity);
+  filter:
+    saturate(1.08)
+    brightness(1.02)
+    contrast(1.08);
+  image-rendering: auto;
+  transform: scale(1.004);
+}
+
 .signal-media--pixel,
 .signal-media--outline,
 .signal-media--colour-pixel {
@@ -117,6 +129,7 @@
   transform:
     translate(var(--signal-pixel-shift-x), var(--signal-pixel-shift-y))
     scale(1.008);
+  animation: phosphor-pixel-breakup .19s steps(2) infinite;
 }
 
 .signal-media--pixel.signal-media--ready {
@@ -140,6 +153,7 @@
   transform:
     translateX(var(--signal-outline-shift-x))
     scale(var(--signal-outline-scale));
+  animation: phosphor-line-hold .31s steps(1) infinite;
 }
 
 .signal-media--outline.signal-media--ready {
@@ -164,6 +178,7 @@
   transform:
     translateX(var(--signal-colour-pixel-shift-x))
     scale(1.006);
+  animation: chroma-pixel-slip .23s steps(2) infinite;
 }
 
 .signal-media--colour-pixel.signal-media--ready {
@@ -369,6 +384,26 @@
   100% { transform: translate(-1%, -1%); }
 }
 
+@keyframes phosphor-pixel-breakup {
+  0% { mask-position: 0 0, 0 0; transform: translate(var(--signal-pixel-shift-x), var(--signal-pixel-shift-y)) scale(1.008); }
+  33% { mask-position: 5px -3px, 0 4px; transform: translate(calc(var(--signal-pixel-shift-x) - 7px), calc(var(--signal-pixel-shift-y) + 2px)) scale(1.01); }
+  66% { mask-position: -2px 6px, 0 -3px; transform: translate(calc(var(--signal-pixel-shift-x) + 4px), calc(var(--signal-pixel-shift-y) - 1px)) scale(1.006); }
+  100% { mask-position: 3px 1px, 0 0; transform: translate(var(--signal-pixel-shift-x), var(--signal-pixel-shift-y)) scale(1.008); }
+}
+
+@keyframes phosphor-line-hold {
+  0%, 43% { mask-position: 0 0; transform: translateX(var(--signal-outline-shift-x)) scale(var(--signal-outline-scale)); }
+  44%, 61% { mask-position: 0 11px; transform: translateX(calc(var(--signal-outline-shift-x) - 9px)) scale(var(--signal-outline-scale)); }
+  62%, 74% { mask-position: 0 -7px; transform: translateX(calc(var(--signal-outline-shift-x) + 13px)) scale(var(--signal-outline-scale)); }
+  75%, 100% { mask-position: 0 3px; transform: translateX(var(--signal-outline-shift-x)) scale(var(--signal-outline-scale)); }
+}
+
+@keyframes chroma-pixel-slip {
+  0% { mask-position: 0 0, 0 0; transform: translateX(var(--signal-colour-pixel-shift-x)) scale(1.006); }
+  50% { mask-position: 6px -4px, 13px 0; transform: translateX(calc(var(--signal-colour-pixel-shift-x) - 8px)) scale(1.008); }
+  100% { mask-position: -3px 5px, -9px 0; transform: translateX(calc(var(--signal-colour-pixel-shift-x) + 5px)) scale(1.006); }
+}
+
 @keyframes tracking {
   0%, 92%, 95%, 100% { opacity: 0; transform: translateX(0) scaleY(1); }
   93% { opacity: calc(.34 * var(--glitch-intensity)); transform: translateX(-1.4%) scaleY(4); }
@@ -415,7 +450,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   .crt__noise,
-  .crt__tear { animation: none; }
+  .crt__tear,
+  .signal-media--pixel,
+  .signal-media--outline,
+  .signal-media--colour-pixel { animation: none; }
   .cursor { animation-duration: 1.8s; }
   .contact { transition-duration: .01ms; }
   .identity-lockup { transform: translateY(-50%); }

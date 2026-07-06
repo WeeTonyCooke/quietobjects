@@ -10,9 +10,9 @@ export function useExperience(reducedMotion) {
   const contactChoreographySeconds = 4.2
 
   const revealContact = useCallback(() => {
-    if (!latest.current.contactAvailable || contactRequested.current) return
+    if (contactRequested.current) return
     contactRequested.current = true
-    contactStartedAt.current = performance.now()
+    if (latest.current.contactAvailable) contactStartedAt.current = performance.now()
     const next = snapshotAt(latest.current.elapsed, {
       contactElapsed: 0,
       contactRequested: true,
@@ -32,6 +32,9 @@ export function useExperience(reducedMotion) {
       const contactElapsed = contactStartedAt.current
         ? (now - contactStartedAt.current) / 1000
         : 0
+      if (contactRequested.current && latest.current.contactAvailable && !contactStartedAt.current) {
+        contactStartedAt.current = now
+      }
       const next = snapshotAt(elapsed, {
         contactElapsed,
         contactRequested: contactRequested.current,
@@ -52,7 +55,9 @@ export function useExperience(reducedMotion) {
 
     let frame
     const updateContact = (now) => {
-      const contactElapsed = (now - contactStartedAt.current) / 1000
+      const contactElapsed = contactStartedAt.current
+        ? (now - contactStartedAt.current) / 1000
+        : 0
       const next = snapshotAt(latest.current.elapsed, {
         contactElapsed,
         contactRequested: true,
@@ -61,7 +66,9 @@ export function useExperience(reducedMotion) {
       latest.current = next
       setExperience(next)
 
-      if (contactElapsed < contactChoreographySeconds) frame = requestAnimationFrame(updateContact)
+      if (!contactStartedAt.current || contactElapsed < contactChoreographySeconds) {
+        frame = requestAnimationFrame(updateContact)
+      }
     }
 
     frame = requestAnimationFrame(updateContact)
