@@ -22,8 +22,12 @@ export const TIMING = Object.freeze({
     emergeEnd: 14,
     colourStart: 8,
     colourEnd: 16.35,
-    stillStart: 16.55,
-    stillEnd: 18.2,
+    angleOneStart: 18.35,
+    angleOneEnd: 18.92,
+    angleTwoStart: 19.45,
+    angleTwoEnd: 20.08,
+    stillStart: 20.45,
+    stillEnd: 20.72,
     maximumOpacity: 0.92,
     integrity: [
       [4, 0],
@@ -62,8 +66,10 @@ export const TIMING = Object.freeze({
       { at: 8.35, duration: 0.38, amount: 0.68, direction: -1 },
       { at: 10.2, duration: 0.2, amount: 0.38, direction: 1 },
       { at: 16.25, duration: 0.58, amount: 1, direction: 1 },
-      { at: 17.45, duration: 0.22, amount: 0.42, direction: -1 },
-      { at: 22.25, duration: 0.36, amount: 0.74, direction: -1 },
+      { at: 18.22, duration: 0.18, amount: 0.42, direction: -1, screen: 0.55 },
+      { at: 19.3, duration: 0.16, amount: 0.5, direction: 1, screen: 0.62 },
+      { at: 20.32, duration: 0.32, amount: 0.88, direction: -1, screen: 0.95 },
+      { at: 22.25, duration: 0.24, amount: 0.62, direction: -1, screen: 0.48 },
     ],
     contactFaults: [
       { at: 0.25, duration: 0.18, amount: 0.42, direction: 1 },
@@ -158,15 +164,27 @@ function ruptureAt(elapsed, contactElapsed = 0, contactSequenceStarted = false) 
       const progress = (elapsed - fault.at) / fault.duration
       const shaped = faultShape(progress)
       const amount = shaped.amount * fault.amount
-      if (amount <= strongest.amount) return strongest
+      const screenAmount = shaped.amount * (fault.screen ?? fault.amount * 0.32)
+      if (amount <= strongest.amount && screenAmount <= strongest.screen) return strongest
 
       return {
-        amount,
+        amount: Math.max(strongest.amount, amount),
         direction: shaped.direction * fault.direction,
+        screen: Math.max(strongest.screen, screenAmount),
       }
     },
-    { amount: 0, direction: 0 },
+    { amount: 0, direction: 0, screen: 0 },
   )
+}
+
+function steppedWindow(elapsed, start, end) {
+  if (elapsed < start || elapsed >= end) return 0
+  const progress = (elapsed - start) / (end - start)
+  if (progress < 0.16) return 0.72
+  if (progress < 0.28) return 0.18
+  if (progress < 0.78) return 0.95
+  if (progress < 0.9) return 0.34
+  return 0
 }
 
 export function snapshotAt(
@@ -176,6 +194,12 @@ export function snapshotAt(
   const time = reducedMotion ? 24.5 : Math.max(0, elapsed)
   const emergence = smoothstep(time, TIMING.object.emergeStart, TIMING.object.emergeEnd)
   const colour = smoothstep(time, TIMING.object.colourStart, TIMING.object.colourEnd)
+  const angleOne = reducedMotion
+    ? 0
+    : steppedWindow(time, TIMING.object.angleOneStart, TIMING.object.angleOneEnd)
+  const angleTwo = reducedMotion
+    ? 0
+    : steppedWindow(time, TIMING.object.angleTwoStart, TIMING.object.angleTwoEnd)
   const still = smoothstep(time, TIMING.object.stillStart, TIMING.object.stillEnd)
   const contactAvailable = time >= TIMING.contactAvailable
   const contactSequenceStarted = contactAvailable && contactRequested
@@ -241,6 +265,8 @@ export function snapshotAt(
       saturation: 0.03 + colour * 0.52,
       brightness: 0.38 + emergence * 0.45,
       blur: (1 - emergence) * 0.75,
+      angleOne,
+      angleTwo,
       still,
     },
     signal: {
@@ -249,6 +275,7 @@ export function snapshotAt(
       colourPixel,
       rupture: rupture.amount,
       ruptureDirection: rupture.direction,
+      screen: rupture.screen,
     },
     crt: {
       noise: reducedMotion ? 0.012 : 0.02 + recovery * 0.018 - settling * 0.008,

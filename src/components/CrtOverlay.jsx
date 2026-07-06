@@ -10,6 +10,9 @@ export function CrtOverlay() {
     <div className="crt" aria-hidden="true">
       <div className="crt__scanlines" />
       <div className="crt__noise" />
+      <div className="crt__dropout" />
+      <div className="crt__blocks" />
+      <div className="crt__colour-bars" />
       <div className="crt__vignette" />
       {TEARS.map((tear) => (
         <i

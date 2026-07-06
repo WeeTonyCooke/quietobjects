@@ -99,6 +99,18 @@ export function SignalArtwork({ experience, reducedMotion }) {
             <source src="/assets/signal.mp4" type="video/mp4" />
           </video>
           <img
+            src="/assets/resolved-angle-45.png"
+            alt=""
+            aria-hidden="true"
+            className="signal-media signal-media--resolved-angle signal-media--resolved-angle-one"
+          />
+          <img
+            src="/assets/resolved-angle-270.png"
+            alt=""
+            aria-hidden="true"
+            className="signal-media signal-media--resolved-angle signal-media--resolved-angle-two"
+          />
+          <img
             src="/assets/resolved-signal.png"
             alt=""
             aria-hidden="true"
