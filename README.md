@@ -17,4 +17,4 @@ Open the local URL printed by Vite, usually `http://localhost:5173`.
 
 All state boundaries, terminal message timings, typewriter speed, sculpture recovery, colour recovery, and contact availability live in `src/experience/timeline.js`.
 
-The contact email is currently the placeholder `hello@yourdomain.com` in `src/components/Terminal.jsx`.
+The contact email is `hello@quietobjects.ie` in `src/components/Terminal.jsx`.

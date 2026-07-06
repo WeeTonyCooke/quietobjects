@@ -8,12 +8,10 @@ export const TIMING = Object.freeze({
     HELLO: 16,
   },
   messages: [
-    { at: 1, text: 'signal detected.' },
+    { at: 1, text: 'signal detected.....' },
     { at: 4, text: 'recovering geometry....' },
-    { at: 8, text: 'recovering chroma.....' },
-    { at: 12.5, text: 'connection established.' },
+    { at: 8, text: 'recovering chroma....' },
     { at: 16, text: 'hello....' },
-    { at: 18, text: '....and welcome.' },
   ],
   typewriter: {
     characterSeconds: 0.072,

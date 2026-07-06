@@ -196,6 +196,7 @@
   bottom: clamp(32px, 7vh, 82px);
   width: min(460px, calc(100vw - 48px));
   color: var(--phosphor-green);
+  font-family: 'Phosphor 1', 'Phosphor', 'IBM Plex Mono', 'SFMono-Regular', 'Cascadia Mono', 'Roboto Mono', Consolas, monospace;
   text-align: left;
   text-shadow: none;
 }
