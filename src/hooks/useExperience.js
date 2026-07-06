@@ -7,6 +7,7 @@ export function useExperience(reducedMotion) {
   const latest = useRef(snapshotAt(0, { reducedMotion }))
   const [experience, setExperience] = useState(latest.current)
   const [contactRun, setContactRun] = useState(0)
+  const contactChoreographySeconds = 4.2
 
   const revealContact = useCallback(() => {
     if (!latest.current.contactAvailable || contactRequested.current) return
@@ -60,7 +61,7 @@ export function useExperience(reducedMotion) {
       latest.current = next
       setExperience(next)
 
-      if (!next.contactVisible) frame = requestAnimationFrame(updateContact)
+      if (contactElapsed < contactChoreographySeconds) frame = requestAnimationFrame(updateContact)
     }
 
     frame = requestAnimationFrame(updateContact)

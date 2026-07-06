@@ -21,7 +21,7 @@ export const TIMING = Object.freeze({
     emergeStart: 4,
     emergeEnd: 14,
     colourStart: 8,
-    colourEnd: 24,
+    colourEnd: 16.35,
     maximumOpacity: 0.92,
     integrity: [
       [4, 0],
@@ -40,12 +40,30 @@ export const TIMING = Object.freeze({
     ],
   },
   signalRecovery: {
-    outlineStart: 4.15,
-    outlinePeak: 8.4,
-    outlineFade: 12.6,
-    outlineEnd: 18,
-    ruptureAt: 22.25,
-    ruptureDuration: 0.62,
+    pixelStart: 1.15,
+    pixelPeak: 2.8,
+    pixelFade: 5.2,
+    pixelEnd: 8.6,
+    lineStart: 3.65,
+    linePeak: 6.8,
+    lineFade: 10.4,
+    lineEnd: 16.2,
+    colourPixelStart: 7.85,
+    colourPixelPeak: 11.4,
+    colourPixelFade: 15.2,
+    colourPixelEnd: 18.4,
+    faults: [
+      { at: 1.85, duration: 0.34, amount: 0.32, direction: -1 },
+      { at: 4.55, duration: 0.52, amount: 0.56, direction: 1 },
+      { at: 8.35, duration: 0.7, amount: 0.74, direction: -1 },
+      { at: 16.25, duration: 0.82, amount: 1, direction: 1 },
+      { at: 22.25, duration: 0.62, amount: 0.78, direction: -1 },
+    ],
+    contactFaults: [
+      { at: 0.25, duration: 0.36, amount: 0.46, direction: 1 },
+      { at: 1.15, duration: 0.68, amount: 0.72, direction: -1 },
+      { at: 3.15, duration: 0.5, amount: 0.54, direction: 1 },
+    ],
   },
   identityReveal: 20.8,
   divisionReveal: 21.5,
@@ -108,10 +126,7 @@ function integrityAt(elapsed) {
   return keyframes.at(-1)[1]
 }
 
-function ruptureAt(elapsed) {
-  const progress = (elapsed - TIMING.signalRecovery.ruptureAt)
-    / TIMING.signalRecovery.ruptureDuration
-
+function faultShape(progress) {
   if (progress < 0 || progress >= 1) return { amount: 0, direction: 0 }
   if (progress < 0.12) return { amount: 0.92, direction: -1 }
   if (progress < 0.25) return { amount: 0.24, direction: 1 }
@@ -121,11 +136,36 @@ function ruptureAt(elapsed) {
   return { amount: 0.12, direction: 1 }
 }
 
+function ruptureAt(elapsed, contactElapsed = 0, contactSequenceStarted = false) {
+  const events = [...TIMING.signalRecovery.faults]
+
+  if (contactSequenceStarted) {
+    TIMING.signalRecovery.contactFaults.forEach((fault) => {
+      events.push({ ...fault, at: elapsed - contactElapsed + fault.at })
+    })
+  }
+
+  return events.reduce(
+    (strongest, fault) => {
+      const progress = (elapsed - fault.at) / fault.duration
+      const shaped = faultShape(progress)
+      const amount = shaped.amount * fault.amount
+      if (amount <= strongest.amount) return strongest
+
+      return {
+        amount,
+        direction: shaped.direction * fault.direction,
+      }
+    },
+    { amount: 0, direction: 0 },
+  )
+}
+
 export function snapshotAt(
   elapsed,
   { contactElapsed = 0, contactRequested = false, reducedMotion = false } = {},
 ) {
-  const time = reducedMotion ? TIMING.object.colourEnd : Math.max(0, elapsed)
+  const time = reducedMotion ? 24.5 : Math.max(0, elapsed)
   const emergence = smoothstep(time, TIMING.object.emergeStart, TIMING.object.emergeEnd)
   const colour = smoothstep(time, TIMING.object.colourStart, TIMING.object.colourEnd)
   const contactAvailable = time >= TIMING.contactAvailable
@@ -137,16 +177,40 @@ export function snapshotAt(
   const settling = smoothstep(time, TIMING.states.RESOLVE, TIMING.states.HELLO)
   const outlineBuild = smoothstep(
     time,
-    TIMING.signalRecovery.outlineStart,
-    TIMING.signalRecovery.outlinePeak,
+    TIMING.signalRecovery.lineStart,
+    TIMING.signalRecovery.linePeak,
   )
   const outlineDecay = 1 - smoothstep(
     time,
-    TIMING.signalRecovery.outlineFade,
-    TIMING.signalRecovery.outlineEnd,
+    TIMING.signalRecovery.lineFade,
+    TIMING.signalRecovery.lineEnd,
   )
-  const outline = reducedMotion ? 0 : outlineBuild * outlineDecay * (0.62 + integrityAt(time) * 0.38)
-  const rupture = reducedMotion ? { amount: 0, direction: 0 } : ruptureAt(time)
+  const pixelBuild = smoothstep(
+    time,
+    TIMING.signalRecovery.pixelStart,
+    TIMING.signalRecovery.pixelPeak,
+  )
+  const pixelDecay = 1 - smoothstep(
+    time,
+    TIMING.signalRecovery.pixelFade,
+    TIMING.signalRecovery.pixelEnd,
+  )
+  const colourPixelBuild = smoothstep(
+    time,
+    TIMING.signalRecovery.colourPixelStart,
+    TIMING.signalRecovery.colourPixelPeak,
+  )
+  const colourPixelDecay = 1 - smoothstep(
+    time,
+    TIMING.signalRecovery.colourPixelFade,
+    TIMING.signalRecovery.colourPixelEnd,
+  )
+  const pixel = reducedMotion ? 0 : pixelBuild * pixelDecay * (0.32 + integrityAt(time) * 0.5)
+  const outline = reducedMotion ? 0 : outlineBuild * outlineDecay * (0.52 + integrityAt(time) * 0.48)
+  const colourPixel = reducedMotion ? 0 : colourPixelBuild * colourPixelDecay * (0.45 + colour * 0.45)
+  const rupture = reducedMotion
+    ? { amount: 0, direction: 0 }
+    : ruptureAt(time, contactElapsed, contactSequenceStarted)
 
   return {
     elapsed: time,
@@ -170,7 +234,9 @@ export function snapshotAt(
       blur: (1 - emergence) * 0.75,
     },
     signal: {
+      pixel,
       outline,
+      colourPixel,
       rupture: rupture.amount,
       ruptureDirection: rupture.direction,
     },
@@ -182,4 +248,4 @@ export function snapshotAt(
   }
 }
 
-export const TIMELINE_END = TIMING.object.colourEnd
+export const TIMELINE_END = 24.5

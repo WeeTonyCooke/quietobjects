@@ -10,12 +10,17 @@
   --noise-opacity: .02;
   --scanline-opacity: .42;
   --glitch-intensity: 0;
+  --signal-pixel-opacity: 0;
   --signal-outline-opacity: 0;
+  --signal-colour-pixel-opacity: 0;
   --signal-shift-x: 0px;
   --signal-shift-y: 0px;
   --signal-skew: 0deg;
+  --signal-pixel-shift-x: 0px;
+  --signal-pixel-shift-y: 0px;
   --signal-outline-shift-x: 0px;
   --signal-outline-scale: 1;
+  --signal-colour-pixel-shift-x: 0px;
   --signal-contrast: 1;
   --logo-shift-x: 0px;
   --logo-shift-y: 0px;
@@ -88,11 +93,37 @@
   opacity: var(--object-opacity);
 }
 
-.signal-media--outline {
+.signal-media--pixel,
+.signal-media--outline,
+.signal-media--colour-pixel {
   z-index: 2;
   opacity: 0;
   image-rendering: pixelated;
   mix-blend-mode: screen;
+}
+
+.signal-media--pixel {
+  filter: grayscale(1) sepia(1) saturate(11) hue-rotate(58deg) brightness(1.42) contrast(5.4);
+  mask-image:
+    radial-gradient(circle at 50% 50%, #000 0 1.15px, transparent 1.35px),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 5px,
+      #000 5px,
+      #000 6px
+    );
+  mask-size: 8px 8px, 100% 19px;
+  transform:
+    translate(var(--signal-pixel-shift-x), var(--signal-pixel-shift-y))
+    scale(1.008);
+}
+
+.signal-media--pixel.signal-media--ready {
+  opacity: var(--signal-pixel-opacity);
+}
+
+.signal-media--outline {
   filter: grayscale(1) sepia(1) saturate(9) hue-rotate(62deg) brightness(1.18) contrast(3.2);
   mask-image: repeating-linear-gradient(
     to bottom,
@@ -113,6 +144,30 @@
 
 .signal-media--outline.signal-media--ready {
   opacity: var(--signal-outline-opacity);
+}
+
+.signal-media--colour-pixel {
+  filter:
+    saturate(1.55)
+    brightness(1.08)
+    contrast(1.55);
+  mask-image:
+    radial-gradient(circle at 50% 50%, #000 0 1.4px, transparent 1.65px),
+    repeating-linear-gradient(
+      to right,
+      #000 0,
+      #000 10px,
+      transparent 10px,
+      transparent 15px
+    );
+  mask-size: 9px 9px, 41px 100%;
+  transform:
+    translateX(var(--signal-colour-pixel-shift-x))
+    scale(1.006);
+}
+
+.signal-media--colour-pixel.signal-media--ready {
+  opacity: var(--signal-colour-pixel-opacity);
 }
 
 .mca-lockup {
