@@ -105,10 +105,34 @@ export function SignalArtwork({ experience, reducedMotion }) {
             className="signal-media signal-media--resolved-angle signal-media--resolved-angle-one"
           />
           <img
-            src="/assets/resolved-angle-270.png"
+            src="/assets/resolved-angle-90.png"
             alt=""
             aria-hidden="true"
             className="signal-media signal-media--resolved-angle signal-media--resolved-angle-two"
+          />
+          <img
+            src="/assets/resolved-angle-135.png"
+            alt=""
+            aria-hidden="true"
+            className="signal-media signal-media--resolved-angle signal-media--resolved-angle-three"
+          />
+          <img
+            src="/assets/resolved-angle-180.png"
+            alt=""
+            aria-hidden="true"
+            className="signal-media signal-media--resolved-angle signal-media--resolved-angle-four"
+          />
+          <img
+            src="/assets/resolved-angle-225.png"
+            alt=""
+            aria-hidden="true"
+            className="signal-media signal-media--resolved-angle signal-media--resolved-angle-five"
+          />
+          <img
+            src="/assets/resolved-angle-270.png"
+            alt=""
+            aria-hidden="true"
+            className="signal-media signal-media--resolved-angle signal-media--resolved-angle-six"
           />
           <img
             src="/assets/resolved-signal.png"

@@ -22,12 +22,16 @@ export const TIMING = Object.freeze({
     emergeEnd: 14,
     colourStart: 8,
     colourEnd: 16.35,
-    angleOneStart: 18.35,
-    angleOneEnd: 18.92,
-    angleTwoStart: 19.45,
-    angleTwoEnd: 20.08,
-    stillStart: 20.45,
-    stillEnd: 20.72,
+    angleWindows: [
+      [18.35, 18.72],
+      [18.85, 19.22],
+      [19.35, 19.7],
+      [19.84, 20.18],
+      [20.32, 20.66],
+      [20.8, 21.16],
+    ],
+    stillStart: 21.42,
+    stillEnd: 21.68,
     maximumOpacity: 0.92,
     integrity: [
       [4, 0],
@@ -67,9 +71,13 @@ export const TIMING = Object.freeze({
       { at: 10.2, duration: 0.2, amount: 0.38, direction: 1 },
       { at: 16.25, duration: 0.58, amount: 1, direction: 1 },
       { at: 18.22, duration: 0.18, amount: 0.42, direction: -1, screen: 0.55 },
-      { at: 19.3, duration: 0.16, amount: 0.5, direction: 1, screen: 0.62 },
-      { at: 20.32, duration: 0.32, amount: 0.88, direction: -1, screen: 0.95 },
-      { at: 22.25, duration: 0.24, amount: 0.62, direction: -1, screen: 0.48 },
+      { at: 18.78, duration: 0.14, amount: 0.46, direction: 1, screen: 0.58 },
+      { at: 19.28, duration: 0.16, amount: 0.5, direction: -1, screen: 0.62 },
+      { at: 19.78, duration: 0.14, amount: 0.52, direction: 1, screen: 0.66 },
+      { at: 20.25, duration: 0.16, amount: 0.5, direction: -1, screen: 0.64 },
+      { at: 20.72, duration: 0.18, amount: 0.56, direction: 1, screen: 0.7 },
+      { at: 21.28, duration: 0.32, amount: 0.88, direction: -1, screen: 0.95 },
+      { at: 22.85, duration: 0.24, amount: 0.62, direction: -1, screen: 0.48 },
     ],
     contactFaults: [
       { at: 0.25, duration: 0.18, amount: 0.42, direction: 1 },
@@ -191,15 +199,12 @@ export function snapshotAt(
   elapsed,
   { contactElapsed = 0, contactRequested = false, reducedMotion = false } = {},
 ) {
-  const time = reducedMotion ? 24.5 : Math.max(0, elapsed)
+  const time = reducedMotion ? 25.5 : Math.max(0, elapsed)
   const emergence = smoothstep(time, TIMING.object.emergeStart, TIMING.object.emergeEnd)
   const colour = smoothstep(time, TIMING.object.colourStart, TIMING.object.colourEnd)
-  const angleOne = reducedMotion
-    ? 0
-    : steppedWindow(time, TIMING.object.angleOneStart, TIMING.object.angleOneEnd)
-  const angleTwo = reducedMotion
-    ? 0
-    : steppedWindow(time, TIMING.object.angleTwoStart, TIMING.object.angleTwoEnd)
+  const angles = TIMING.object.angleWindows.map(([start, end]) => (
+    reducedMotion ? 0 : steppedWindow(time, start, end)
+  ))
   const still = smoothstep(time, TIMING.object.stillStart, TIMING.object.stillEnd)
   const contactAvailable = time >= TIMING.contactAvailable
   const contactSequenceStarted = contactAvailable && contactRequested
@@ -265,8 +270,7 @@ export function snapshotAt(
       saturation: 0.03 + colour * 0.52,
       brightness: 0.38 + emergence * 0.45,
       blur: (1 - emergence) * 0.75,
-      angleOne,
-      angleTwo,
+      angles,
       still,
     },
     signal: {
@@ -285,4 +289,4 @@ export function snapshotAt(
   }
 }
 
-export const TIMELINE_END = 24.5
+export const TIMELINE_END = 25.5

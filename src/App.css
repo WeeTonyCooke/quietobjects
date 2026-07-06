@@ -9,10 +9,16 @@
   --object-opacity: 0;
   --resolved-angle-one-opacity: 0;
   --resolved-angle-two-opacity: 0;
+  --resolved-angle-three-opacity: 0;
+  --resolved-angle-four-opacity: 0;
+  --resolved-angle-five-opacity: 0;
+  --resolved-angle-six-opacity: 0;
   --resolved-still-opacity: 0;
   --screen-glitch-opacity: 0;
   --screen-glitch-shift: 0px;
   --screen-glitch-shift-inverse: 0px;
+  --resolved-angle-shift-x: 0px;
+  --resolved-angle-skew: 0deg;
   --noise-opacity: .02;
   --scanline-opacity: .42;
   --glitch-intensity: 0;
@@ -113,11 +119,14 @@
 
 .signal-media--resolved-angle {
   z-index: 3;
-  width: 72%;
-  height: 72%;
-  inset: 14%;
+  width: 100%;
+  height: 100%;
+  inset: 0;
   object-fit: contain;
-  transform: scale(1.02);
+  transform:
+    translateX(var(--resolved-angle-shift-x))
+    skewX(var(--resolved-angle-skew))
+    scale(1.018);
 }
 
 .signal-media--resolved-angle-one {
@@ -126,6 +135,22 @@
 
 .signal-media--resolved-angle-two {
   opacity: var(--resolved-angle-two-opacity);
+}
+
+.signal-media--resolved-angle-three {
+  opacity: var(--resolved-angle-three-opacity);
+}
+
+.signal-media--resolved-angle-four {
+  opacity: var(--resolved-angle-four-opacity);
+}
+
+.signal-media--resolved-angle-five {
+  opacity: var(--resolved-angle-five-opacity);
+}
+
+.signal-media--resolved-angle-six {
+  opacity: var(--resolved-angle-six-opacity);
 }
 
 .signal-media--resolved-still {
@@ -281,7 +306,7 @@
 }
 
 .mca-lockup--visible .mca-edge-calibration {
-  animation: mca-calibration-presence 2.45s 1.05s linear both;
+  animation: mca-calibration-presence 2.75s 2.05s linear both;
 }
 
 .mca-edge-trace,
@@ -300,14 +325,14 @@
       90deg,
       transparent,
       rgba(190, 255, 178, .18) 8%,
-      rgba(245, 255, 242, .92) 44%,
-      rgba(120, 255, 104, .42) 61%,
-      rgba(101, 236, 255, .18) 74%,
+      rgba(250, 255, 248, 1) 44%,
+      rgba(131, 247, 104, .62) 61%,
+      rgba(101, 236, 255, .26) 74%,
       transparent
     );
   box-shadow:
-    0 0 3px rgba(220, 255, 215, .35),
-    0 0 9px rgba(112, 232, 90, .16);
+    0 0 4px rgba(235, 255, 230, .55),
+    0 0 12px rgba(112, 232, 90, .28);
   transform-origin: left center;
 }
 
@@ -333,15 +358,15 @@
 }
 
 .mca-lockup--visible .mca-edge-trace--a {
-  animation: mca-trace-a 2.25s 1.18s steps(1) both;
+  animation: mca-trace-a 2.5s 2.18s steps(1) both;
 }
 
 .mca-lockup--visible .mca-edge-trace--c {
-  animation: mca-trace-c 2.25s 1.18s steps(1) both;
+  animation: mca-trace-c 2.5s 2.18s steps(1) both;
 }
 
 .mca-lockup--visible .mca-edge-trace--tail {
-  animation: mca-trace-tail 2.25s 1.18s steps(1) both;
+  animation: mca-trace-tail 2.5s 2.18s steps(1) both;
 }
 
 .mca-edge-hit {
@@ -350,8 +375,8 @@
   border-radius: 50%;
   background: rgba(244, 255, 238, .96);
   box-shadow:
-    0 0 4px rgba(244, 255, 238, .68),
-    0 0 12px rgba(112, 232, 90, .22);
+    0 0 5px rgba(244, 255, 238, .78),
+    0 0 15px rgba(112, 232, 90, .34);
 }
 
 .mca-edge-hit::before,
@@ -377,11 +402,11 @@
 }
 
 .mca-lockup--visible .mca-edge-hit--start {
-  animation: mca-hit-start 2.45s 1.1s steps(1) both;
+  animation: mca-hit-start 2.75s 2.05s steps(1) both;
 }
 
 .mca-lockup--visible .mca-edge-hit--end {
-  animation: mca-hit-end 2.45s 1.1s steps(1) both;
+  animation: mca-hit-end 2.75s 2.05s steps(1) both;
 }
 
 .mca-descriptor {

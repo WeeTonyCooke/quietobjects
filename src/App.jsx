@@ -23,14 +23,22 @@ function App() {
     }
   }, [reducedMotion, revealContact])
 
+  const [angleOne, angleTwo, angleThree, angleFour, angleFive, angleSix] = experience.object.angles
+
   const variables = {
-    '--object-opacity': experience.object.opacity * (1 - experience.object.still * 0.72),
-    '--resolved-angle-one-opacity': experience.object.angleOne * 0.9,
-    '--resolved-angle-two-opacity': experience.object.angleTwo * 0.9,
+    '--object-opacity': experience.object.opacity * (1 - experience.object.still),
+    '--resolved-angle-one-opacity': angleOne * 0.92,
+    '--resolved-angle-two-opacity': angleTwo * 0.92,
+    '--resolved-angle-three-opacity': angleThree * 0.92,
+    '--resolved-angle-four-opacity': angleFour * 0.92,
+    '--resolved-angle-five-opacity': angleFive * 0.92,
+    '--resolved-angle-six-opacity': angleSix * 0.92,
     '--resolved-still-opacity': experience.object.still * 0.96,
     '--screen-glitch-opacity': Math.min(1, experience.signal.screen * 0.86),
     '--screen-glitch-shift': `${experience.signal.screen * experience.signal.ruptureDirection * 22}px`,
     '--screen-glitch-shift-inverse': `${experience.signal.screen * experience.signal.ruptureDirection * -13}px`,
+    '--resolved-angle-shift-x': `${experience.signal.screen * experience.signal.ruptureDirection * 8}px`,
+    '--resolved-angle-skew': `${experience.signal.rupture * experience.signal.ruptureDirection * 1.4}deg`,
     '--noise-opacity': experience.crt.noise,
     '--scanline-opacity': experience.crt.scanlines,
     '--glitch-intensity': experience.crt.glitches,
