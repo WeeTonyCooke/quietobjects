@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { LogoLockup } from './LogoLockup'
 
+const MATCH_FRAME_TIME = 8
+const MATCH_LOCK_TIME = 23.7
+const LOOP_SECONDS = 90
+
 export function SignalArtwork({ experience, reducedMotion }) {
   const video = useRef(null)
   const pixelVideo = useRef(null)
@@ -32,6 +36,14 @@ export function SignalArtwork({ experience, reducedMotion }) {
       return
     }
 
+    const targetTime = experience.elapsed >= MATCH_LOCK_TIME
+      ? (MATCH_FRAME_TIME + experience.elapsed - MATCH_LOCK_TIME) % LOOP_SECONDS
+      : video.current.currentTime
+
+    if (experience.elapsed >= MATCH_LOCK_TIME && Math.abs(video.current.currentTime - targetTime) > 0.12) {
+      video.current.currentTime = targetTime
+    }
+
     media.slice(1).forEach((item) => {
       if (Math.abs(item.currentTime - video.current.currentTime) > 0.08) {
         item.currentTime = video.current.currentTime
@@ -39,7 +51,7 @@ export function SignalArtwork({ experience, reducedMotion }) {
     })
 
     Promise.all(media.map((item) => item.play())).catch(() => setVideoReady(false))
-  }, [reducedMotion, videoReady])
+  }, [experience.elapsed, reducedMotion, videoReady])
 
   return (
     <div className="artwork">

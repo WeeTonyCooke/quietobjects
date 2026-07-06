@@ -25,6 +25,12 @@ export function LogoLockup({ visible, descriptorVisible }) {
           className="mca-logo mca-logo--rim"
         />
         <span className="mca-edge-calibration" aria-hidden="true">
+          <img
+            src="/assets/mca-logo-white@3x.png"
+            alt=""
+            aria-hidden="true"
+            className="mca-edge-logo-mask"
+          />
           <span className="mca-edge-trace mca-edge-trace--a" />
           <span className="mca-edge-trace mca-edge-trace--c" />
           <span className="mca-edge-trace mca-edge-trace--tail" />

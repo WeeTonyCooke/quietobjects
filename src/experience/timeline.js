@@ -204,7 +204,7 @@ export function snapshotAt(
   elapsed,
   { contactElapsed = 0, contactRequested = false, reducedMotion = false } = {},
 ) {
-  const time = reducedMotion ? 25.5 : Math.max(0, elapsed)
+  const time = reducedMotion ? TIMELINE_END : Math.max(0, elapsed)
   const emergence = smoothstep(time, TIMING.object.emergeStart, TIMING.object.emergeEnd)
   const colour = smoothstep(time, TIMING.object.colourStart, TIMING.object.colourEnd)
   const angles = TIMING.object.angleWindows.map(([start, end]) => (
@@ -265,14 +265,14 @@ export function snapshotAt(
   return {
     elapsed: time,
     state: contactVisible ? 'CONTACT' : stateAt(time),
-    terminalText: contactSequenceStarted || identityVisible
+    terminalText: contactSequenceStarted
       ? ''
       : reducedMotion
         ? TIMING.messages.at(-1).text
         : terminalTextAt(time),
     contactAvailable,
     contactVisible,
-    diagnosticVisible: !identityVisible && !contactSequenceStarted,
+    diagnosticVisible: !contactSequenceStarted,
     identityVisible,
     divisionVisible,
     object: {
