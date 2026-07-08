@@ -1,8 +1,8 @@
 # Quiet Objects
 
-A full-screen digital installation built with React, Three.js, and a central recovery timeline.
+A single-screen React landing page with a TouchDesigner video layer, slow CRT signal recovery, terminal typewriter, and minimal contact interaction. The procedural Three.js ribbon is a temporary fallback until the final video exports are supplied.
 
-Before changing behaviour, pacing, interaction, or visual language, read [MANIFESTO.md](./MANIFESTO.md).
+Before changing the behaviour, pacing, interaction, or visual language of this project, read [MANIFESTO.md](./MANIFESTO.md).
 
 ## Run locally
 
@@ -11,10 +11,12 @@ npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite, usually `http://localhost:5173`.
+## Customise
 
-## Adjust pacing
+Replace `hello@yourdomain.com` in `src/components/ContactReveal.jsx` when the final contact address is available.
 
-All state boundaries, terminal message timings, typewriter speed, sculpture recovery, colour recovery, and contact availability live in `src/experience/timeline.js`.
+Add the TouchDesigner renders as `public/assets/signal.webm` and `public/assets/signal.mp4`. Until then, the colour transition runs from roughly 9–46 seconds in the procedural fallback. Motion, video playback, typewriter timing, CRT overlays, and mobile layout respect `prefers-reduced-motion` and viewport size.
 
-The contact email is `hello@quietobjects.ie` in `src/components/Terminal.jsx`.
+## Deploy to Netlify
+
+Connect the repository in Netlify. The included `netlify.toml` builds with `npm run build` and publishes `dist`.
