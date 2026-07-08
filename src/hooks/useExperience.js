@@ -1,15 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { snapshotAt, TIMELINE_END, TIMING } from '../experience/timeline'
 
-const RECOVERY_SEEN_KEY = 'quiet-objects:recovery-seen'
-
-function hasSeenRecovery() {
-  try {
-    return window.localStorage.getItem(RECOVERY_SEEN_KEY) === '1'
-  } catch {
-    return false
-  }
-}
+const RECOVERY_SEEN_KEY = 'quiet-objects:recovery-seen:v4'
 
 function rememberRecovery() {
   try {
@@ -20,7 +12,7 @@ function rememberRecovery() {
 }
 
 export function useExperience(reducedMotion) {
-  const skipIntro = useRef(reducedMotion || hasSeenRecovery())
+  const skipIntro = useRef(reducedMotion)
   const contactRequested = useRef(false)
   const contactStartedAt = useRef(null)
   const latest = useRef(snapshotAt(skipIntro.current ? TIMELINE_END : 0, { reducedMotion }))
