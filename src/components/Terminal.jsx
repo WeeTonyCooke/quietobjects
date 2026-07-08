@@ -8,7 +8,7 @@ export function Terminal({ experience }) {
         </p>
       )}
       <div className={`contact ${experience.contactVisible ? 'contact--visible' : ''}`}>
-        <a href="mailto:hello@quietobjects.ie" tabIndex={experience.contactVisible ? 0 : -1}>
+        <a href="mailto:hello@quietobjects.ie?subject=Collaborate" tabIndex={experience.contactVisible ? 0 : -1}>
           hello@quietobjects.ie
         </a>
       </div>

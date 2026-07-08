@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import './McaEmailLogo.css'
 
-const EMAIL_HREF = 'mailto:hello@quietobjects.ie'
+const EMAIL_HREF = 'mailto:hello@quietobjects.ie?subject=Collaborate'
 const TRACE_DURATION_MS = 320
 
 export function McaEmailLogo({ className = '' }) {
