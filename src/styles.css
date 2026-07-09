@@ -63,8 +63,8 @@ a {
   z-index: 0;
   right: clamp(36px, 5.4vw, 78px);
   bottom: clamp(168px, 26vh, 300px);
-  width: clamp(210px, 21vw, 300px);
-  height: clamp(210px, 21vw, 300px);
+  width: clamp(180px, 18vw, 250px);
+  height: clamp(180px, 18vw, 250px);
   object-fit: contain;
   opacity: .9;
   filter: saturate(1.08) contrast(1.1) brightness(.9);
@@ -75,7 +75,7 @@ a {
 /* Halo lives in the lockup grid so it stays centred over MCA. */
 .page-shell--halo .signal-mark--halo {
   position: relative;
-  width: clamp(260px, 26vw, 390px);
+  width: clamp(210px, 21vw, 310px);
   aspect-ratio: 1 / 1;
   opacity: 1;
   overflow: visible;
@@ -144,7 +144,7 @@ a {
   position: absolute;
   right: clamp(36px, 5.4vw, 78px);
   bottom: clamp(168px, 26vh, 300px);
-  width: clamp(190px, 19vw, 282px);
+  width: clamp(160px, 16vw, 230px);
   aspect-ratio: 1 / 1;
   background: center / contain no-repeat url('/assets/halo-still.png');
   opacity: 0;
@@ -353,7 +353,7 @@ a {
 
 .signal-mark {
   position: relative;
-  width: clamp(190px, 19vw, 282px);
+  width: clamp(160px, 16vw, 230px);
   aspect-ratio: 335 / 360;
   isolation: isolate;
   opacity: 0;
@@ -447,7 +447,7 @@ a {
 
 .mca-logo {
   display: block;
-  width: clamp(156px, 15vw, 232px);
+  width: clamp(132px, 13vw, 196px);
   height: auto;
   overflow: visible;
 }
@@ -564,9 +564,9 @@ a {
   align-items: baseline;
   justify-content: center;
   max-width: 100%;
-  margin-top: clamp(20px, 2.6vw, 34px);
+  margin-top: clamp(16px, 2.2vw, 28px);
   color: rgba(245, 245, 240, .92);
-  font-size: clamp(.82rem, .95vw, 1.02rem);
+  font-size: clamp(.76rem, .88vw, .94rem);
   line-height: 1.6;
   letter-spacing: .04em;
   text-align: center;
@@ -1478,11 +1478,12 @@ a {
 
 @media (max-width: 700px) {
   .page-shell {
-    padding: 28px 22px;
+    place-items: end start;
+    padding: 22px 18px calc(18px + env(safe-area-inset-bottom));
   }
 
   .lockup {
-    margin: 0 0 calc(12px + env(safe-area-inset-bottom)) 0;
+    margin: 0;
   }
 
   .signal-video,
@@ -1492,31 +1493,37 @@ a {
   .acquire-burst__negative,
   .idle-burst__slice,
   .idle-burst__rgb {
-    right: 28px;
-    bottom: 190px;
+    right: auto;
+    left: 18px;
+    bottom: 168px;
   }
 
   .signal-video,
   .signal-still {
-    width: min(54vw, 220px);
-    height: min(54vw, 220px);
+    width: min(42vw, 168px);
+    height: min(42vw, 168px);
   }
 
   .page-shell--halo .signal-mark--halo {
-    width: min(72vw, 320px);
+    width: min(48vw, 196px);
   }
 
   .signal-mark {
-    width: min(54vw, 210px);
+    width: min(42vw, 168px);
   }
 
   .mca-logo {
-    width: min(52vw, 178px);
+    width: min(42vw, 148px);
+  }
+
+  .mca-subtitle {
+    font-size: clamp(.62rem, 2.8vw, .72rem);
   }
 
   .contact-action {
     flex-wrap: wrap;
-    margin-top: 34px;
+    margin-top: 22px;
+    font-size: .74rem;
   }
 }
 
