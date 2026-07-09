@@ -75,10 +75,12 @@ a {
 /* Halo lives in the lockup grid so it stays centred over MCA. */
 .page-shell--halo .signal-mark--halo {
   position: relative;
-  width: clamp(210px, 21vw, 310px);
+  width: clamp(190px, 19vw, 270px);
   aspect-ratio: 1 / 1;
   opacity: 1;
   overflow: visible;
+  /* Video has black padding around the disc — pull MCA up optically. */
+  margin-bottom: clamp(-36px, -3.6vw, -22px);
 }
 
 .page-shell--halo .signal-mark--halo .signal-video,
@@ -424,8 +426,12 @@ a {
 .mca-lockup {
   display: grid;
   justify-items: center;
-  margin-top: clamp(9px, 1.2vw, 16px);
+  margin-top: clamp(6px, .8vw, 12px);
   opacity: 0;
+}
+
+.page-shell--halo .mca-lockup {
+  margin-top: clamp(2px, .35vw, 6px);
 }
 
 .page-shell--calibrating .mca-lockup,
@@ -564,7 +570,7 @@ a {
   align-items: baseline;
   justify-content: center;
   max-width: 100%;
-  margin-top: clamp(16px, 2.2vw, 28px);
+  margin-top: clamp(12px, 1.6vw, 22px);
   color: rgba(245, 245, 240, .92);
   font-size: clamp(.76rem, .88vw, .94rem);
   line-height: 1.6;
@@ -1506,6 +1512,7 @@ a {
 
   .page-shell--halo .signal-mark--halo {
     width: min(48vw, 196px);
+    margin-bottom: -22px;
   }
 
   .signal-mark {
@@ -1516,13 +1523,19 @@ a {
     width: min(42vw, 148px);
   }
 
+  .page-shell--halo .mca-lockup,
+  .mca-lockup {
+    margin-top: 2px;
+  }
+
   .mca-subtitle {
     font-size: clamp(.62rem, 2.8vw, .72rem);
+    margin-top: 8px;
   }
 
   .contact-action {
     flex-wrap: wrap;
-    margin-top: 22px;
+    margin-top: 12px;
     font-size: .74rem;
   }
 }
