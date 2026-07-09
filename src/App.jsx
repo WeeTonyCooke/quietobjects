@@ -12,10 +12,10 @@ const MCA_PATHS = [
  * Soft signal plays, then:
  * glitch → brief movie flash → glitch → recovered mark.
  */
-const ACQUIRE_AT = 3.2
+const ACQUIRE_AT = 2.0
 const ACQUIRE_DURATION = 2.65
 const MCA_CALIBRATION_DURATION = 3.4
-const CONTACT_REVEAL_AT = 8.8
+const CONTACT_REVEAL_AT = 7.6
 const HALO_WEIGHT = 0.8
 
 function pickVariant() {

@@ -93,18 +93,7 @@ a {
   bottom: auto;
   opacity: 1;
   mix-blend-mode: normal;
-  /* Soft open: inverted negative signal — colour locks through acquire. */
-  filter: invert(1) hue-rotate(180deg) contrast(1.18) brightness(.92) saturate(.35);
-  /*
-   * Invert turns the padded black field white. Mask to the disc so the
-   * opening never reads as a white movie box.
-   */
-  -webkit-mask-image: radial-gradient(circle at center, #000 52%, rgba(0, 0, 0, .85) 62%, transparent 74%);
-  mask-image: radial-gradient(circle at center, #000 52%, rgba(0, 0, 0, .85) 62%, transparent 74%);
-}
-
-.page-shell--halo.page-shell--signal .signal-mark--halo .signal-video {
-  animation: halo-signal-breathe 7.2s ease-in-out infinite;
+  filter: saturate(1.08) contrast(1.12) brightness(.96);
 }
 
 .page-shell--object.page-shell--acquire .signal-video {
@@ -125,21 +114,10 @@ a {
   opacity: 1;
   filter: saturate(1.08) contrast(1.12) brightness(.96);
   animation: none;
-  -webkit-mask-image: none;
-  mask-image: none;
 }
 
 .page-shell--halo.page-shell--reduced .signal-mark--halo .signal-still {
   filter: saturate(1.08) contrast(1.12) brightness(.96);
-  -webkit-mask-image: none;
-  mask-image: none;
-}
-
-/* Keep the circular mask while the inverted open would otherwise flash a white box. */
-.page-shell--halo.page-shell--signal .signal-mark--halo .signal-video,
-.page-shell--halo.page-shell--acquire .signal-mark--halo .signal-video {
-  -webkit-mask-image: radial-gradient(circle at center, #000 52%, rgba(0, 0, 0, .85) 62%, transparent 74%);
-  mask-image: radial-gradient(circle at center, #000 52%, rgba(0, 0, 0, .85) 62%, transparent 74%);
 }
 
 /* --- Violent acquisition burst (full field) --- */
@@ -785,38 +763,24 @@ a {
   42%, 100% { opacity: 0; }
 }
 
-@keyframes halo-signal-breathe {
-  0%, 100% {
-    filter: invert(1) hue-rotate(180deg) contrast(1.15) brightness(.88) saturate(.3);
-  }
-  50% {
-    filter: invert(1) hue-rotate(180deg) contrast(1.28) brightness(1) saturate(.45);
-  }
-}
-
 @keyframes video-acquire-halo {
-  /* Hold negative, glitch through mono/phosphor punches, land in spectrum. */
-  0%, 6% {
+  /* Colour halo glitch punches, then settle back to the living spectrum. */
+  0%, 4% {
     opacity: 1;
-    filter: invert(1) hue-rotate(180deg) contrast(1.25) brightness(.92) saturate(.35);
+    filter: saturate(1.08) contrast(1.12) brightness(.96);
   }
-  7%, 12% { opacity: 0; }
-  14%, 20% {
+  5%, 12% { opacity: 0; }
+  14%, 22% {
     opacity: 1;
-    filter: invert(1) grayscale(.2) contrast(1.55) brightness(1.1) hue-rotate(160deg);
+    filter: saturate(1.45) contrast(1.35) brightness(1.08) hue-rotate(-14deg);
   }
-  22%, 28% { opacity: 0; }
-  30%, 38% {
+  24%, 32% { opacity: 0; }
+  34%, 42% {
     opacity: 1;
-    filter: grayscale(.7) saturate(.25) contrast(1.35) brightness(.95);
+    filter: saturate(1.25) contrast(1.28) brightness(1.02) hue-rotate(10deg);
   }
-  40%, 46% { opacity: 0; }
-  48%, 56% {
-    opacity: 1;
-    filter: grayscale(.15) saturate(.85) contrast(1.2) brightness(.98) hue-rotate(6deg);
-  }
-  58%, 64% { opacity: 0; }
-  66%, 100% {
+  44%, 52% { opacity: 0; }
+  54%, 100% {
     opacity: 1;
     filter: saturate(1.08) contrast(1.12) brightness(.96);
   }
