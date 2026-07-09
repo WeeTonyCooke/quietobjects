@@ -95,6 +95,12 @@ a {
   mix-blend-mode: normal;
   /* Soft open: inverted negative signal — colour locks through acquire. */
   filter: invert(1) hue-rotate(180deg) contrast(1.18) brightness(.92) saturate(.35);
+  /*
+   * Invert turns the padded black field white. Mask to the disc so the
+   * opening never reads as a white movie box.
+   */
+  -webkit-mask-image: radial-gradient(circle at center, #000 52%, rgba(0, 0, 0, .85) 62%, transparent 74%);
+  mask-image: radial-gradient(circle at center, #000 52%, rgba(0, 0, 0, .85) 62%, transparent 74%);
 }
 
 .page-shell--halo.page-shell--signal .signal-mark--halo .signal-video {
@@ -119,10 +125,21 @@ a {
   opacity: 1;
   filter: saturate(1.08) contrast(1.12) brightness(.96);
   animation: none;
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 .page-shell--halo.page-shell--reduced .signal-mark--halo .signal-still {
   filter: saturate(1.08) contrast(1.12) brightness(.96);
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+/* Keep the circular mask while the inverted open would otherwise flash a white box. */
+.page-shell--halo.page-shell--signal .signal-mark--halo .signal-video,
+.page-shell--halo.page-shell--acquire .signal-mark--halo .signal-video {
+  -webkit-mask-image: radial-gradient(circle at center, #000 52%, rgba(0, 0, 0, .85) 62%, transparent 74%);
+  mask-image: radial-gradient(circle at center, #000 52%, rgba(0, 0, 0, .85) 62%, transparent 74%);
 }
 
 /* --- Violent acquisition burst (full field) --- */
