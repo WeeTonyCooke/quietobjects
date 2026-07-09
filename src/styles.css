@@ -284,7 +284,7 @@ a {
   position: absolute;
   right: clamp(36px, 5.4vw, 78px);
   bottom: clamp(168px, 26vh, 300px);
-  width: clamp(190px, 19vw, 282px);
+  width: clamp(160px, 16vw, 230px);
   aspect-ratio: 1 / 1;
   background: center / contain no-repeat url('/assets/halo-still.png');
   opacity: 0;
