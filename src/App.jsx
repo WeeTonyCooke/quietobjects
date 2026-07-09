@@ -250,11 +250,7 @@ export function App() {
       data-variant={variant}
       data-idle-hit={idleHit || undefined}
     >
-      {reducedMotion && isHalo && (
-        <img className="signal-still" src="/assets/halo-still.png" alt="" aria-hidden="true" />
-      )}
-
-      {!reducedMotion && (
+      {!isHalo && !reducedMotion && (
         <video
           ref={videoRef}
           className="signal-video"
@@ -294,7 +290,27 @@ export function App() {
       </div>
 
       <section className="lockup" aria-label="Quiet Objects">
-        {!isHalo && (
+        {isHalo ? (
+          <div className="signal-mark signal-mark--halo" aria-hidden="true">
+            {reducedMotion ? (
+              <img className="signal-still" src="/assets/halo-still.png" alt="" />
+            ) : (
+              <video
+                ref={videoRef}
+                className="signal-video"
+                muted
+                playsInline
+                preload="auto"
+                loop
+                aria-hidden="true"
+              >
+                {videoSources.map((source) => (
+                  <source key={source.src} src={source.src} type={source.type} />
+                ))}
+              </video>
+            )}
+          </div>
+        ) : (
           <div className="signal-mark" aria-hidden="true">
             {!reducedMotion && (
               <>

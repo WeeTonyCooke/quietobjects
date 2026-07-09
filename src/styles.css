@@ -72,17 +72,23 @@ a {
   pointer-events: none;
 }
 
-.page-shell--halo .signal-video,
-.page-shell--halo .signal-still {
-  /*
-   * Padded TD export: disc is smaller in-frame, so scale the square up so the
-   * bright ring keeps roughly the old on-page weight. True black padding +
-   * normal blend avoid the old movie-box lift from screen blend.
-   */
-  width: clamp(300px, 30vw, 450px);
-  height: clamp(300px, 30vw, 450px);
-  right: clamp(-18px, .4vw, 12px);
-  bottom: clamp(108px, 18vh, 220px);
+/* Halo lives in the lockup grid so it stays centred over MCA. */
+.page-shell--halo .signal-mark--halo {
+  position: relative;
+  width: clamp(260px, 26vw, 390px);
+  aspect-ratio: 1 / 1;
+  opacity: 1;
+  overflow: visible;
+}
+
+.page-shell--halo .signal-mark--halo .signal-video,
+.page-shell--halo .signal-mark--halo .signal-still {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  right: auto;
+  bottom: auto;
   opacity: 1;
   mix-blend-mode: normal;
   filter: saturate(1.08) contrast(1.12) brightness(.96);
@@ -101,10 +107,9 @@ a {
   opacity: 0;
 }
 
-.page-shell--halo.page-shell--locked .signal-video,
-.page-shell--halo .signal-still {
+.page-shell--halo.page-shell--locked .signal-mark--halo .signal-video,
+.page-shell--halo .signal-mark--halo .signal-still {
   opacity: 1;
-  z-index: 1;
 }
 
 /* --- Violent acquisition burst (full field) --- */
@@ -142,14 +147,12 @@ a {
   background-image: url('/assets/quiet-object-black-315.png');
 }
 
+/* Halo mark is in the lockup; keep acquire drama as field bars only. */
 .page-shell--halo .acquire-burst__slice,
 .page-shell--halo .acquire-burst__rgb,
 .page-shell--halo .acquire-burst__phosphor,
 .page-shell--halo .acquire-burst__negative {
-  width: clamp(300px, 30vw, 450px);
-  right: clamp(-18px, .4vw, 12px);
-  bottom: clamp(108px, 18vh, 220px);
-  mix-blend-mode: screen;
+  display: none;
 }
 
 .page-shell--acquire .acquire-burst__slice--1 {
@@ -405,14 +408,6 @@ a {
 
 .page-shell--object.page-shell--idle-hit .signal-mark__image--idle-b {
   animation: idle-angle-b .72s steps(1) forwards;
-}
-
-/* Halo has no still stack — reserve the same footprint so MCA stays aligned. */
-.page-shell--halo .lockup::before {
-  content: '';
-  display: block;
-  width: clamp(190px, 19vw, 282px);
-  aspect-ratio: 1 / 1;
 }
 
 .mca-lockup {
@@ -1478,17 +1473,8 @@ a {
     height: min(54vw, 220px);
   }
 
-  .page-shell--halo .signal-video,
-  .page-shell--halo .signal-still {
-    width: min(78vw, 360px);
-    height: min(78vw, 360px);
-    right: -14px;
-    bottom: 140px;
-  }
-
-  .page-shell--halo .lockup::before {
-    width: min(54vw, 210px);
-    height: min(54vw, 210px);
+  .page-shell--halo .signal-mark--halo {
+    width: min(72vw, 320px);
   }
 
   .signal-mark {
@@ -1545,7 +1531,8 @@ a {
     display: none !important;
   }
 
-  .page-shell--halo .signal-still {
+  .page-shell--halo .signal-mark--halo,
+  .page-shell--halo .signal-mark--halo .signal-still {
     display: block !important;
     opacity: .92 !important;
   }
