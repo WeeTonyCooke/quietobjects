@@ -10,12 +10,22 @@ const MCA_PATHS = [
 
 /**
  * Soft signal plays, then:
- * glitch → brief movie flash → glitch → hi-fi still.
+ * glitch → brief movie flash → glitch → recovered mark.
  */
 const ACQUIRE_AT = 3.2
 const ACQUIRE_DURATION = 2.65
 const MCA_CALIBRATION_DURATION = 3.4
 const CONTACT_REVEAL_AT = 8.8
+const HALO_WEIGHT = 0.8
+
+function pickVariant() {
+  if (typeof window === 'undefined') return 'halo'
+
+  const forced = new URLSearchParams(window.location.search).get('variant')
+  if (forced === 'halo' || forced === 'object') return forced
+
+  return Math.random() < HALO_WEIGHT ? 'halo' : 'object'
+}
 
 function McaTraceLogo() {
   const svgRef = useRef(null)
@@ -127,6 +137,8 @@ function McaTraceLogo() {
 export function App() {
   const reducedMotion = useReducedMotion()
   const videoRef = useRef(null)
+  const [variant] = useState(pickVariant)
+  const isHalo = variant === 'halo'
   const [phase, setPhase] = useState(reducedMotion ? 'locked' : 'signal')
   const [calibrating, setCalibrating] = useState(false)
   const [idleHit, setIdleHit] = useState(0)
@@ -169,9 +181,18 @@ export function App() {
   }, [reducedMotion])
 
   useEffect(() => {
-    if (phase !== 'locked' || !videoRef.current || reducedMotion) return
-    videoRef.current.pause()
-  }, [phase, reducedMotion])
+    const video = videoRef.current
+    if (phase !== 'locked' || !video || reducedMotion) return
+
+    // Object hard-locks to the still; halo keeps its designed micro-breath.
+    if (isHalo) {
+      video.playbackRate = 0.85
+      video.play().catch(() => {})
+      return
+    }
+
+    video.pause()
+  }, [phase, reducedMotion, isHalo])
 
   useEffect(() => {
     if (phase !== 'locked' || reducedMotion) return undefined
@@ -202,6 +223,7 @@ export function App() {
 
   const shellClass = [
     'page-shell',
+    `page-shell--${variant}`,
     `page-shell--${phase}`,
     calibrating ? 'page-shell--calibrating' : '',
     idleHit > 0 ? 'page-shell--idle-hit' : '',
@@ -211,12 +233,27 @@ export function App() {
     .filter(Boolean)
     .join(' ')
 
+  const videoSources = isHalo
+    ? [
+        { src: '/assets/halo.webm', type: 'video/webm' },
+        { src: '/assets/halo.mp4', type: 'video/mp4' },
+      ]
+    : [
+        { src: '/assets/signal.webm', type: 'video/webm' },
+        { src: '/assets/signal.mp4', type: 'video/mp4' },
+      ]
+
   return (
     <main
       className={shellClass}
       aria-labelledby="quiet-objects-title"
+      data-variant={variant}
       data-idle-hit={idleHit || undefined}
     >
+      {reducedMotion && isHalo && (
+        <img className="signal-still" src="/assets/halo-still.png" alt="" aria-hidden="true" />
+      )}
+
       {!reducedMotion && (
         <video
           ref={videoRef}
@@ -227,8 +264,9 @@ export function App() {
           loop
           aria-hidden="true"
         >
-          <source src="/assets/signal.webm" type="video/webm" />
-          <source src="/assets/signal.mp4" type="video/mp4" />
+          {videoSources.map((source) => (
+            <source key={source.src} src={source.src} type={source.type} />
+          ))}
         </video>
       )}
 
@@ -256,48 +294,54 @@ export function App() {
       </div>
 
       <section className="lockup" aria-label="Quiet Objects">
-        <div className="signal-mark" aria-hidden="true">
-          <img
-            className="signal-mark__image signal-mark__image--punch-a"
-            src="/assets/quiet-object-black-0.png"
-            alt=""
-          />
-          <img
-            className="signal-mark__image signal-mark__image--punch-b"
-            src="/assets/quiet-object-black-45.png"
-            alt=""
-          />
-          <img
-            className="signal-mark__image signal-mark__image--punch-c"
-            src="/assets/quiet-object-black-225.png"
-            alt=""
-          />
-          <img
-            className="signal-mark__image signal-mark__image--phosphor"
-            src="/assets/quiet-object-black-45.png"
-            alt=""
-          />
-          <img
-            className="signal-mark__image signal-mark__image--negative"
-            src="/assets/quiet-object-black-0.png"
-            alt=""
-          />
-          <img
-            className="signal-mark__image signal-mark__image--final"
-            src="/assets/quiet-object-black-315.png"
-            alt=""
-          />
-          <img
-            className="signal-mark__image signal-mark__image--idle-a"
-            src="/assets/quiet-object-black-45.png"
-            alt=""
-          />
-          <img
-            className="signal-mark__image signal-mark__image--idle-b"
-            src="/assets/quiet-object-black-225.png"
-            alt=""
-          />
-        </div>
+        {!isHalo && (
+          <div className="signal-mark" aria-hidden="true">
+            {!reducedMotion && (
+              <>
+                <img
+                  className="signal-mark__image signal-mark__image--punch-a"
+                  src="/assets/quiet-object-black-0.png"
+                  alt=""
+                />
+                <img
+                  className="signal-mark__image signal-mark__image--punch-b"
+                  src="/assets/quiet-object-black-45.png"
+                  alt=""
+                />
+                <img
+                  className="signal-mark__image signal-mark__image--punch-c"
+                  src="/assets/quiet-object-black-225.png"
+                  alt=""
+                />
+                <img
+                  className="signal-mark__image signal-mark__image--phosphor"
+                  src="/assets/quiet-object-black-45.png"
+                  alt=""
+                />
+                <img
+                  className="signal-mark__image signal-mark__image--negative"
+                  src="/assets/quiet-object-black-0.png"
+                  alt=""
+                />
+                <img
+                  className="signal-mark__image signal-mark__image--idle-a"
+                  src="/assets/quiet-object-black-45.png"
+                  alt=""
+                />
+                <img
+                  className="signal-mark__image signal-mark__image--idle-b"
+                  src="/assets/quiet-object-black-225.png"
+                  alt=""
+                />
+              </>
+            )}
+            <img
+              className="signal-mark__image signal-mark__image--final"
+              src="/assets/quiet-object-black-315.png"
+              alt=""
+            />
+          </div>
+        )}
 
         <div className="mca-lockup">
           <h1 id="quiet-objects-title" className="mca-heading">

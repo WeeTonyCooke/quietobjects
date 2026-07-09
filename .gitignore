@@ -1,7 +1,10 @@
 node_modules
 dist
 .vite-cache
+.netlify
 .DS_Store
 output
 tmp
 optical-patch
+REFERENCES
+movillefestival-icloud-cleanup-manifest.md

@@ -1,8 +1,15 @@
 # Quiet Objects
 
-A single-screen React landing page with a TouchDesigner video layer, slow CRT signal recovery, terminal typewriter, and minimal contact interaction. The procedural Three.js ribbon is a temporary fallback until the final video exports are supplied.
+Single-screen landing for MCA Applied Signal Research: soft signal recovery, CRT acquire, MCA calibration, and a quiet contact reveal.
 
-Before changing the behaviour, pacing, interaction, or visual language of this project, read [MANIFESTO.md](./MANIFESTO.md).
+Each visit picks a weighted sequence:
+
+- **Halo** (~80%) — soft spectral halo that keeps its micro-breath after lock
+- **Object** (~20%) — quiet-object still recovery
+
+Force either path while developing with `?variant=halo` or `?variant=object`.
+
+Before changing pacing, interaction, or visual language, read [MANIFESTO.md](./MANIFESTO.md).
 
 ## Run locally
 
@@ -11,12 +18,14 @@ npm install
 npm run dev
 ```
 
-## Customise
+## Assets
 
-Replace `hello@yourdomain.com` in `src/components/ContactReveal.jsx` when the final contact address is available.
+Required files in `public/assets/`:
 
-Add the TouchDesigner renders as `public/assets/signal.webm` and `public/assets/signal.mp4`. Until then, the colour transition runs from roughly 9–46 seconds in the procedural fallback. Motion, video playback, typewriter timing, CRT overlays, and mobile layout respect `prefers-reduced-motion` and viewport size.
+- `halo.webm` / `halo.mp4` / `halo-still.png` — primary spectral halo sequence
+- `signal.webm` / `signal.mp4` — quiet-object soft underlayer
+- `quiet-object-black-*.png` — hi-fi stills for the object acquire / lock path
 
-## Deploy to Netlify
+## Deploy
 
-Connect the repository in Netlify. The included `netlify.toml` builds with `npm run build` and publishes `dist`.
+Connect the repository in Netlify. `netlify.toml` builds with `npm run build` and publishes `dist`.

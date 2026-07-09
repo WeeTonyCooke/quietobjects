@@ -1,8 +1,12 @@
-# TouchDesigner signal render
+# Signal assets
 
-Drop the final exports here as:
+## Halo sequence (~80% of visits)
+- `halo.webm` — VP9
+- `halo.mp4` — H.264 for Safari / iOS
+- `halo-still.png` — reduced-motion fallback
 
-- `signal.webm` — VP9, preferred by Chrome and Firefox
-- `signal.mp4` — H.264, required for Safari and iOS
+## Object sequence (~20% of visits)
+- `signal.webm` / `signal.mp4` — soft underlayer before acquire
+- `quiet-object-black-*.png` — hi-fi stills for acquire / lock
 
-Recommended master: 1920×1080, 30fps, 45–75 seconds, seamless loop, no text, dark background, object placed slightly right of centre. Keep grain and analogue noise out of the render; the site applies those treatments on top.
+Keep grain and analogue noise out of the video renders; the site applies CRT treatments on top.
