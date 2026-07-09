@@ -483,13 +483,12 @@ a {
 
 .contact-action {
   display: inline-flex;
-  gap: .55ch;
   align-items: baseline;
   justify-content: center;
   max-width: 100%;
   margin-top: clamp(20px, 2.6vw, 34px);
-  color: rgba(245, 245, 240, .88);
-  font-size: clamp(.62rem, .72vw, .78rem);
+  color: rgba(245, 245, 240, .92);
+  font-size: clamp(.82rem, .95vw, 1.02rem);
   line-height: 1.6;
   letter-spacing: .04em;
   text-align: center;
@@ -499,10 +498,6 @@ a {
   opacity: 0;
   transform: translateY(3px);
   pointer-events: none;
-}
-
-.contact-action span {
-  color: rgba(245, 245, 240, .48);
 }
 
 .contact-action--visible {

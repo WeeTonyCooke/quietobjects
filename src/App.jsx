@@ -12,10 +12,10 @@ const MCA_PATHS = [
  * Soft signal plays, then:
  * glitch → brief movie flash → glitch → hi-fi still.
  */
-const ACQUIRE_AT = 4.2
+const ACQUIRE_AT = 3.2
 const ACQUIRE_DURATION = 2.65
 const MCA_CALIBRATION_DURATION = 3.4
-const CONTACT_REVEAL_AT = 9.8
+const CONTACT_REVEAL_AT = 8.8
 
 function McaTraceLogo() {
   const svgRef = useRef(null)
@@ -312,7 +312,7 @@ export function App() {
           tabIndex={contactRevealed ? 0 : -1}
           aria-hidden={!contactRevealed}
         >
-          <span>Collaborate:</span> hello@quietobjects.ie
+          hello@quietobjects.ie
         </a>
       </section>
 
