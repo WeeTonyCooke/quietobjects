@@ -1478,7 +1478,7 @@ a {
 
 @media (max-width: 700px) {
   .page-shell {
-    place-items: end start;
+    place-items: end;
     padding: 22px 18px calc(18px + env(safe-area-inset-bottom));
   }
 
@@ -1493,8 +1493,8 @@ a {
   .acquire-burst__negative,
   .idle-burst__slice,
   .idle-burst__rgb {
-    right: auto;
-    left: 18px;
+    left: auto;
+    right: 18px;
     bottom: 168px;
   }
 
