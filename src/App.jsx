@@ -1,10 +1,21 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { CrtOverlay } from './components/CrtOverlay'
+import { useReducedMotion } from './hooks/useReducedMotion'
 
 const MCA_PATHS = [
   'M327 197L297 252L228 105L102 381L0 381L181 9L275 9L279 13L345 151Z',
   'M366 381L267 381L267 376C300 300 340 150 420 70C460 30 510 0 562 0C630 0 690 30 726 58L726 62L672 120C650 102 610 80 562 81C530 82 500 110 483 137C460 175 420 280 366 381Z',
   'M625 310L641 303L669 272L789 13L793 9L884 9L1065 381L966 381L932 309L771 309L805 237L900 237L840 105L834 109L738 323L698 366L672 381L489 381L460 366L420 329L420 322L462 231L492 278L532 309L562 318L602 318Z',
 ]
+
+/**
+ * Soft signal plays, then:
+ * glitch → brief movie flash → glitch → hi-fi still.
+ */
+const ACQUIRE_AT = 4.2
+const ACQUIRE_DURATION = 2.65
+const MCA_CALIBRATION_DURATION = 3.4
+const CONTACT_REVEAL_AT = 9.8
 
 function McaTraceLogo() {
   const svgRef = useRef(null)
@@ -13,7 +24,7 @@ function McaTraceLogo() {
     const paths = svgRef.current?.querySelectorAll('.mca-logo__trace-path')
 
     paths?.forEach((path) => {
-      path.style.setProperty('--path-length', path.getTotalLength())
+      path.style.setProperty('--path-length', String(path.getTotalLength()))
     })
   }, [])
 
@@ -27,18 +38,18 @@ function McaTraceLogo() {
       shapeRendering="geometricPrecision"
     >
       <defs>
-        <linearGradient id="mca-trace-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#fff6ba" />
-          <stop offset="32%" stopColor="#f8fff1" />
-          <stop offset="58%" stopColor="#effdff" />
-          <stop offset="82%" stopColor="#f5f3ff" />
-          <stop offset="100%" stopColor="#fff0fb" />
+        <linearGradient id="mca-spectrum" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#ffe14a" />
+          <stop offset="20%" stopColor="#6dff86" />
+          <stop offset="45%" stopColor="#45f0ff" />
+          <stop offset="70%" stopColor="#6b8cff" />
+          <stop offset="100%" stopColor="#ff5ad4" />
         </linearGradient>
         <linearGradient id="mca-sweep-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
           <stop offset="0%" stopColor="#ffffff" stopOpacity="0" />
-          <stop offset="42%" stopColor="#ffffff" stopOpacity=".08" />
-          <stop offset="50%" stopColor="#ffffff" stopOpacity=".68" />
-          <stop offset="58%" stopColor="#ffffff" stopOpacity=".08" />
+          <stop offset="38%" stopColor="#fff6ba" stopOpacity=".08" />
+          <stop offset="50%" stopColor="#ffffff" stopOpacity=".72" />
+          <stop offset="62%" stopColor="#effdff" stopOpacity=".1" />
           <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
         </linearGradient>
         <mask id="mca-sweep-mask">
@@ -52,7 +63,7 @@ function McaTraceLogo() {
         <clipPath id="mca-left-right-clip" clipPathUnits="userSpaceOnUse">
           <rect className="mca-logo__trace-window" x="0" y="0" width="1065" height="381" />
         </clipPath>
-        <filter id="mca-spark" x="-40%" y="-40%" width="180%" height="180%">
+        <filter id="mca-spark" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="2.2" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
@@ -70,6 +81,17 @@ function McaTraceLogo() {
       <g className="mca-logo__edge" fill="none" strokeLinecap="round" strokeLinejoin="round">
         {MCA_PATHS.map((path) => (
           <path key={`edge-${path}`} d={path} pathLength="1" />
+        ))}
+      </g>
+
+      <g
+        className="mca-logo__spectrum"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {MCA_PATHS.map((path) => (
+          <path key={`spectrum-${path}`} d={path} pathLength="1" />
         ))}
       </g>
 
@@ -98,42 +120,183 @@ function McaTraceLogo() {
           />
         ))}
       </g>
-
-      <circle className="mca-logo__spark mca-logo__spark--one" cx="12" cy="372" r="8" />
-      <circle className="mca-logo__spark mca-logo__spark--two" cx="562" cy="8" r="7" />
-      <circle className="mca-logo__spark mca-logo__spark--three" cx="1048" cy="372" r="9" />
     </svg>
   )
 }
 
 export function App() {
-  const flashFrames = [
-    '/assets/quiet-object-black-0.png',
-    '/assets/quiet-object-black-45.png',
-    '/assets/quiet-object-black-225.png',
+  const reducedMotion = useReducedMotion()
+  const videoRef = useRef(null)
+  const [phase, setPhase] = useState(reducedMotion ? 'locked' : 'signal')
+  const [calibrating, setCalibrating] = useState(false)
+  const [idleHit, setIdleHit] = useState(0)
+  const [contactRevealed, setContactRevealed] = useState(reducedMotion)
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setPhase('locked')
+      setCalibrating(false)
+      setContactRevealed(true)
+      return undefined
+    }
+
+    const video = videoRef.current
+    if (video) {
+      video.playbackRate = 0.85
+      video.play().catch(() => {})
+    }
+
+    const acquire = window.setTimeout(() => {
+      setPhase('acquire')
+      setCalibrating(true)
+    }, ACQUIRE_AT * 1000)
+    const lock = window.setTimeout(
+      () => setPhase('locked'),
+      (ACQUIRE_AT + ACQUIRE_DURATION) * 1000,
+    )
+    const calibrated = window.setTimeout(
+      () => setCalibrating(false),
+      (ACQUIRE_AT + MCA_CALIBRATION_DURATION) * 1000,
+    )
+    const contact = window.setTimeout(() => setContactRevealed(true), CONTACT_REVEAL_AT * 1000)
+
+    return () => {
+      window.clearTimeout(acquire)
+      window.clearTimeout(lock)
+      window.clearTimeout(calibrated)
+      window.clearTimeout(contact)
+    }
+  }, [reducedMotion])
+
+  useEffect(() => {
+    if (phase !== 'locked' || !videoRef.current || reducedMotion) return
+    videoRef.current.pause()
+  }, [phase, reducedMotion])
+
+  useEffect(() => {
+    if (phase !== 'locked' || reducedMotion) return undefined
+
+    let cancelled = false
+    let timer
+
+    const schedule = () => {
+      const delay = 7000 + Math.random() * 11000
+      timer = window.setTimeout(() => {
+        if (cancelled) return
+        setIdleHit((value) => value + 1)
+        timer = window.setTimeout(() => {
+          if (cancelled) return
+          setIdleHit(0)
+          schedule()
+        }, 740)
+      }, delay)
+    }
+
+    schedule()
+
+    return () => {
+      cancelled = true
+      window.clearTimeout(timer)
+    }
+  }, [phase, reducedMotion])
+
+  const shellClass = [
+    'page-shell',
+    `page-shell--${phase}`,
+    calibrating ? 'page-shell--calibrating' : '',
+    idleHit > 0 ? 'page-shell--idle-hit' : '',
+    reducedMotion ? 'page-shell--reduced' : '',
+    contactRevealed ? 'page-shell--contact' : '',
   ]
-  const finalFrame = '/assets/quiet-object-black-315.png'
+    .filter(Boolean)
+    .join(' ')
 
   return (
-    <main className="page-shell" aria-labelledby="quiet-objects-title">
-      <div className="field-anomaly" aria-hidden="true" />
-      <section className="lockup" aria-label="Quiet Objects contact">
+    <main
+      className={shellClass}
+      aria-labelledby="quiet-objects-title"
+      data-idle-hit={idleHit || undefined}
+    >
+      {!reducedMotion && (
+        <video
+          ref={videoRef}
+          className="signal-video"
+          muted
+          playsInline
+          preload="auto"
+          loop
+          aria-hidden="true"
+        >
+          <source src="/assets/signal.webm" type="video/webm" />
+          <source src="/assets/signal.mp4" type="video/mp4" />
+        </video>
+      )}
+
+      <div className="acquire-burst" aria-hidden="true">
+        <span className="acquire-burst__slice acquire-burst__slice--1" />
+        <span className="acquire-burst__slice acquire-burst__slice--2" />
+        <span className="acquire-burst__slice acquire-burst__slice--3" />
+        <span className="acquire-burst__slice acquire-burst__slice--4" />
+        <span className="acquire-burst__rgb acquire-burst__rgb--r" />
+        <span className="acquire-burst__rgb acquire-burst__rgb--g" />
+        <span className="acquire-burst__rgb acquire-burst__rgb--b" />
+        <span className="acquire-burst__bar acquire-burst__bar--1" />
+        <span className="acquire-burst__bar acquire-burst__bar--2" />
+        <span className="acquire-burst__bar acquire-burst__bar--3" />
+        <span className="acquire-burst__phosphor" />
+        <span className="acquire-burst__negative" />
+      </div>
+
+      <div className="idle-burst" aria-hidden="true" key={idleHit || 'idle-0'}>
+        <span className="idle-burst__slice idle-burst__slice--1" />
+        <span className="idle-burst__slice idle-burst__slice--2" />
+        <span className="idle-burst__rgb idle-burst__rgb--r" />
+        <span className="idle-burst__rgb idle-burst__rgb--b" />
+        <span className="idle-burst__bar" />
+      </div>
+
+      <section className="lockup" aria-label="Quiet Objects">
         <div className="signal-mark" aria-hidden="true">
-          {flashFrames.map((src, index) => (
-            <img
-              key={src}
-              className={`signal-mark__image signal-mark__image--flash signal-mark__image--flash-${index + 1}`}
-              src={src}
-              alt=""
-            />
-          ))}
           <img
-            className="signal-mark__image signal-mark__image--base"
-            src={finalFrame}
+            className="signal-mark__image signal-mark__image--punch-a"
+            src="/assets/quiet-object-black-0.png"
             alt=""
           />
-          <span className="signal-mark__glitch signal-mark__glitch--primary" />
-          <span className="signal-mark__glitch signal-mark__glitch--secondary" />
+          <img
+            className="signal-mark__image signal-mark__image--punch-b"
+            src="/assets/quiet-object-black-45.png"
+            alt=""
+          />
+          <img
+            className="signal-mark__image signal-mark__image--punch-c"
+            src="/assets/quiet-object-black-225.png"
+            alt=""
+          />
+          <img
+            className="signal-mark__image signal-mark__image--phosphor"
+            src="/assets/quiet-object-black-45.png"
+            alt=""
+          />
+          <img
+            className="signal-mark__image signal-mark__image--negative"
+            src="/assets/quiet-object-black-0.png"
+            alt=""
+          />
+          <img
+            className="signal-mark__image signal-mark__image--final"
+            src="/assets/quiet-object-black-315.png"
+            alt=""
+          />
+          <img
+            className="signal-mark__image signal-mark__image--idle-a"
+            src="/assets/quiet-object-black-45.png"
+            alt=""
+          />
+          <img
+            className="signal-mark__image signal-mark__image--idle-b"
+            src="/assets/quiet-object-black-225.png"
+            alt=""
+          />
         </div>
 
         <div className="mca-lockup">
@@ -143,10 +306,17 @@ export function App() {
           <p className="mca-subtitle">Applied Signal Research</p>
         </div>
 
-        <a className="contact-action" href="mailto:hello@quietobjects.ie?subject=Collaborate">
+        <a
+          className={`contact-action${contactRevealed ? ' contact-action--visible' : ''}`}
+          href="mailto:hello@quietobjects.ie?subject=Collaborate"
+          tabIndex={contactRevealed ? 0 : -1}
+          aria-hidden={!contactRevealed}
+        >
           <span>Collaborate:</span> hello@quietobjects.ie
         </a>
       </section>
+
+      <CrtOverlay />
     </main>
   )
 }
