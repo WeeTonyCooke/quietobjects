@@ -8,6 +8,14 @@ const MCA_PATHS = [
   'M625 310L641 303L669 272L789 13L793 9L884 9L1065 381L966 381L932 309L771 309L805 237L900 237L840 105L834 109L738 323L698 366L672 381L489 381L460 366L420 329L420 322L462 231L492 278L532 309L562 318L602 318Z',
 ]
 
+/** Demo transmissions — industry labels, not portfolio chrome. */
+const CHANNELS = [
+  { label: 'GOLF', href: 'https://mossyglen-golf-demo.netlify.app' },
+  { label: 'F&B', href: 'https://thedubliner-boston-demo.netlify.app' },
+  { label: 'TAXI', href: 'https://quaycars-demo.netlify.app' },
+  { label: 'TRADE', href: 'https://northshoredecorating-demo.netlify.app' },
+]
+
 /**
  * Soft signal plays, then:
  * glitch → brief movie flash → glitch → recovered mark.
@@ -288,6 +296,25 @@ export function App() {
         <span className="idle-burst__rgb idle-burst__rgb--b" />
         <span className="idle-burst__bar" />
       </div>
+
+      <nav
+        className={`channel-stack${contactRevealed ? ' channel-stack--visible' : ''}`}
+        aria-label="Channels"
+        aria-hidden={!contactRevealed}
+      >
+        {CHANNELS.map((channel) => (
+          <a
+            key={channel.label}
+            className="channel-stack__link"
+            href={channel.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            tabIndex={contactRevealed ? 0 : -1}
+          >
+            {channel.label}
+          </a>
+        ))}
+      </nav>
 
       <section className="lockup" aria-label="Quiet Objects">
         {isHalo ? (

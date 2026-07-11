@@ -337,6 +337,63 @@ a {
   animation: idle-bar .72s steps(1) forwards;
 }
 
+/* --- Channel stack (demo transmissions) --- */
+
+.channel-stack {
+  position: absolute;
+  z-index: 2;
+  top: clamp(18px, 3.2vh, 40px);
+  left: clamp(16px, 3.2vw, 48px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  max-width: min(72vw, 920px);
+  margin: 0;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(4px);
+}
+
+.channel-stack--visible {
+  visibility: visible;
+  pointer-events: auto;
+  animation: contact-reveal .95s var(--settle-ease) forwards;
+}
+
+.channel-stack__link {
+  display: block;
+  color: #000;
+  font-size: clamp(3.2rem, min(13vw, 14vh), 10.5rem);
+  font-weight: 700;
+  line-height: .8;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-text-stroke: clamp(1.2px, .18vw, 2.2px) rgba(244, 244, 236, .88);
+  paint-order: stroke fill;
+  transition:
+    color .35s var(--settle-ease),
+    -webkit-text-stroke-color .35s var(--settle-ease),
+    opacity .35s var(--settle-ease);
+  opacity: .92;
+}
+
+.channel-stack__link:hover,
+.channel-stack__link:focus-visible {
+  color: rgba(244, 244, 236, .94);
+  -webkit-text-stroke-color: rgba(255, 255, 248, 1);
+  opacity: 1;
+  outline: none;
+}
+
+.channel-stack__link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: .08em;
+  text-decoration-thickness: 1px;
+}
+
 /* --- Lockup --- */
 
 .lockup {
@@ -1469,6 +1526,19 @@ a {
     padding: 22px 18px calc(18px + env(safe-area-inset-bottom));
   }
 
+  .channel-stack {
+    top: 16px;
+    left: 14px;
+    right: 14px;
+    max-width: none;
+  }
+
+  .channel-stack__link {
+    font-size: clamp(2.6rem, 18vw, 4.4rem);
+    line-height: .84;
+    -webkit-text-stroke-width: 1.1px;
+  }
+
   .lockup {
     margin: 0;
   }
@@ -1611,5 +1681,16 @@ a {
     opacity: 1 !important;
     transform: none !important;
     visibility: visible !important;
+  }
+
+  .channel-stack--visible {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    animation: none !important;
+  }
+
+  .channel-stack__link {
+    transition: none !important;
   }
 }
