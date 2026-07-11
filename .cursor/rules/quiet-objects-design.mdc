@@ -1,0 +1,38 @@
+---
+description: Quiet Objects design principles (Rams/BFM) — guide all UI, copy, and features
+alwaysApply: true
+---
+
+# Quiet Objects design principles
+
+Canonical doc: `docs/DESIGN-PRINCIPLES.md` (also in the Quiet Objects company repo).
+
+**North star:** The visitor arrives in the middle of something already happening. Quieter beats louder. Client sites should feel like a **used place**, not a tourist attraction.
+
+## Always
+
+- Clarity first — one primary action per screen / first viewport
+- Restraint — fewer screens, done well; no feature for its own sake
+- Calm — no flash, autoplay spam, or shouting UI
+- Function determines form — every element earns its place
+- Systems over one-off pages — tokens, shared patterns
+- Content provides the colour — photos/activity over chrome
+- Honest design — no fake urgency, fake proof, or exaggerated claims
+- Remove until inevitable — cut tiles, chips, dashboard clutter
+- The real work is the product (pint, tee time, fare, quote) — not the website
+
+## Never
+
+- Hero overloaded with stats, promos, and pill clusters
+- Melba-style numbered quick-link tile dashboards (steal function, not chrome)
+- Tourist-brochure homepage when the brief is a working club/venue
+- Gamification, streaks, coins, engagement bait
+- SaaS copy (“Discover experiences”) when place language works (“Book a tee time”)
+
+## Before shipping
+
+1. Does it answer a real job?
+2. Can we remove anything?
+3. Is the UI quieter than the content?
+4. Are we honest?
+5. Does the first viewport feel used, not performed?
