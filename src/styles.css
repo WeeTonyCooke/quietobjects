@@ -347,7 +347,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0;
+  gap: clamp(0.2rem, 0.55vh, 0.55rem);
   max-width: min(72vw, 920px);
   margin: 0;
   pointer-events: none;
@@ -365,24 +365,24 @@ a {
 .channel-stack__link {
   display: block;
   color: #000;
-  font-size: clamp(3.2rem, min(13vw, 14vh), 10.5rem);
+  font-size: clamp(3rem, min(12.5vw, 13vh), 9.5rem);
   font-weight: 700;
-  line-height: .8;
-  letter-spacing: -.02em;
+  line-height: .86;
+  letter-spacing: -.015em;
   text-transform: uppercase;
   text-decoration: none;
-  -webkit-text-stroke: clamp(1.2px, .18vw, 2.2px) rgba(244, 244, 236, .88);
+  -webkit-text-stroke: clamp(1.2px, .18vw, 2.2px) rgba(244, 244, 236, .9);
   paint-order: stroke fill;
   transition:
     color .35s var(--settle-ease),
     -webkit-text-stroke-color .35s var(--settle-ease),
     opacity .35s var(--settle-ease);
-  opacity: .92;
+  opacity: .9;
 }
 
 .channel-stack__link:hover,
 .channel-stack__link:focus-visible {
-  color: rgba(244, 244, 236, .94);
+  color: rgba(244, 244, 236, .96);
   -webkit-text-stroke-color: rgba(255, 255, 248, 1);
   opacity: 1;
   outline: none;

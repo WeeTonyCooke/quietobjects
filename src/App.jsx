@@ -11,8 +11,9 @@ const MCA_PATHS = [
 /** Demo transmissions — industry labels, not portfolio chrome. */
 const CHANNELS = [
   { label: 'GOLF', href: 'https://mossyglen-golf-demo.netlify.app' },
+  { label: 'F&B', href: 'https://thehearthbar.netlify.app' },
   { label: 'TAXI', href: 'https://quaycars-demo.netlify.app' },
-  { label: 'TRADE', href: 'https://northshoredecorating-demo.netlify.app' },
+  { label: 'TRADES', href: 'https://northshoredecorating-demo.netlify.app' },
 ]
 
 /**
