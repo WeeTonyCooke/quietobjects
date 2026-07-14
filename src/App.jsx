@@ -14,6 +14,7 @@ const CHANNELS = [
   { label: 'F&B', href: 'https://thehearthbar.netlify.app' },
   { label: 'TAXI', href: 'https://quaycars-demo.netlify.app' },
   { label: 'TRADES', href: 'https://northshoredecorating-demo.netlify.app' },
+  { label: 'EVENTS', href: 'https://movillefestival.com' },
 ]
 
 /**
