@@ -313,6 +313,9 @@ export function App() {
         {CHANNELS.map((channel) => {
           if (channel.options) {
             const isOpen = expandedChannel === channel.label
+            const optionsId = `channel-options-${channel.label
+              .replace(/[^a-zA-Z0-9]+/g, '-')
+              .toLowerCase()}`
             return (
               <div
                 key={channel.label}
@@ -322,7 +325,7 @@ export function App() {
                   type="button"
                   className="channel-stack__link channel-stack__toggle"
                   aria-expanded={isOpen}
-                  aria-controls={`channel-options-${channel.label}`}
+                  aria-controls={optionsId}
                   tabIndex={contactRevealed ? 0 : -1}
                   onClick={() =>
                     setExpandedChannel((current) =>
@@ -333,7 +336,7 @@ export function App() {
                   {channel.label}
                 </button>
                 <div
-                  id={`channel-options-${channel.label}`}
+                  id={optionsId}
                   className="channel-stack__options"
                   hidden={!isOpen}
                 >
