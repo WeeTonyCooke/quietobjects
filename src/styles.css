@@ -362,6 +362,13 @@ a {
   animation: contact-reveal .95s var(--settle-ease) forwards;
 }
 
+.channel-stack__group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(0.12rem, 0.35vh, 0.35rem);
+}
+
 .channel-stack__link {
   display: block;
   color: #000;
@@ -380,6 +387,16 @@ a {
   opacity: .9;
 }
 
+.channel-stack__toggle {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+
 .channel-stack__link:hover,
 .channel-stack__link:focus-visible {
   color: rgba(244, 244, 236, .96);
@@ -389,6 +406,50 @@ a {
 }
 
 .channel-stack__link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: .08em;
+  text-decoration-thickness: 1px;
+}
+
+.channel-stack__options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(0.08rem, 0.25vh, 0.28rem);
+  padding-left: 0.06em;
+}
+
+.channel-stack__options[hidden] {
+  display: none;
+}
+
+.channel-stack__option {
+  display: block;
+  color: #000;
+  font-size: clamp(1.35rem, min(5.5vw, 5.8vh), 4.2rem);
+  font-weight: 700;
+  line-height: .9;
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+  text-decoration: none;
+  -webkit-text-stroke: clamp(0.8px, .12vw, 1.4px) rgba(244, 244, 236, .85);
+  paint-order: stroke fill;
+  opacity: .82;
+  transition:
+    color .35s var(--settle-ease),
+    -webkit-text-stroke-color .35s var(--settle-ease),
+    opacity .35s var(--settle-ease);
+}
+
+.channel-stack__option:hover,
+.channel-stack__option:focus-visible {
+  color: rgba(244, 244, 236, .96);
+  -webkit-text-stroke-color: rgba(255, 255, 248, 1);
+  opacity: 1;
+  outline: none;
+}
+
+.channel-stack__option:focus-visible {
   text-decoration: underline;
   text-underline-offset: .08em;
   text-decoration-thickness: 1px;
@@ -1539,6 +1600,12 @@ a {
     -webkit-text-stroke-width: 1.1px;
   }
 
+  .channel-stack__option {
+    font-size: clamp(1.15rem, 7.5vw, 2rem);
+    line-height: .88;
+    -webkit-text-stroke-width: 0.9px;
+  }
+
   .lockup {
     margin: 0;
   }
@@ -1690,7 +1757,8 @@ a {
     animation: none !important;
   }
 
-  .channel-stack__link {
+  .channel-stack__link,
+  .channel-stack__option {
     transition: none !important;
   }
 }

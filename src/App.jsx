@@ -11,7 +11,13 @@ const MCA_PATHS = [
 /** Demo transmissions — industry labels, not portfolio chrome. */
 const CHANNELS = [
   { label: 'GOLF', href: 'https://mossyglen-golf-demo.netlify.app' },
-  { label: 'F&B', href: 'https://thehearthbar.netlify.app' },
+  {
+    label: 'F&B',
+    options: [
+      { label: 'HEARTH', href: 'https://thehearthbar.netlify.app' },
+      { label: 'EMERALD', href: 'https://theemerald-moville.netlify.app' },
+    ],
+  },
   { label: 'TAXI', href: 'https://quaycars-demo.netlify.app' },
   { label: 'TRADES', href: 'https://northshoredecorating-demo.netlify.app' },
   { label: 'EVENTS', href: 'https://movillefestival.com' },
@@ -152,6 +158,7 @@ export function App() {
   const [calibrating, setCalibrating] = useState(false)
   const [idleHit, setIdleHit] = useState(0)
   const [contactRevealed, setContactRevealed] = useState(reducedMotion)
+  const [expandedChannel, setExpandedChannel] = useState(null)
 
   useEffect(() => {
     if (reducedMotion) {
@@ -303,18 +310,63 @@ export function App() {
         aria-label="Channels"
         aria-hidden={!contactRevealed}
       >
-        {CHANNELS.map((channel) => (
-          <a
-            key={channel.label}
-            className="channel-stack__link"
-            href={channel.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            tabIndex={contactRevealed ? 0 : -1}
-          >
-            {channel.label}
-          </a>
-        ))}
+        {CHANNELS.map((channel) => {
+          if (channel.options) {
+            const isOpen = expandedChannel === channel.label
+            return (
+              <div
+                key={channel.label}
+                className={`channel-stack__group${isOpen ? ' channel-stack__group--open' : ''}`}
+              >
+                <button
+                  type="button"
+                  className="channel-stack__link channel-stack__toggle"
+                  aria-expanded={isOpen}
+                  aria-controls={`channel-options-${channel.label}`}
+                  tabIndex={contactRevealed ? 0 : -1}
+                  onClick={() =>
+                    setExpandedChannel((current) =>
+                      current === channel.label ? null : channel.label,
+                    )
+                  }
+                >
+                  {channel.label}
+                </button>
+                <div
+                  id={`channel-options-${channel.label}`}
+                  className="channel-stack__options"
+                  hidden={!isOpen}
+                >
+                  {channel.options.map((option) => (
+                    <a
+                      key={option.label}
+                      className="channel-stack__option"
+                      href={option.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      tabIndex={contactRevealed && isOpen ? 0 : -1}
+                    >
+                      {option.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+
+          return (
+            <a
+              key={channel.label}
+              className="channel-stack__link"
+              href={channel.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              tabIndex={contactRevealed ? 0 : -1}
+            >
+              {channel.label}
+            </a>
+          )
+        })}
       </nav>
 
       <section className="lockup" aria-label="Quiet Objects">
