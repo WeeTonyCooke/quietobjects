@@ -1,0 +1,50 @@
+{
+  "eyebrow": "Favourites",
+  "title": "What the room comes back for.",
+  "intro": "Main Street plates \u2014 chowder, roast, a proper burger. Full boards below.",
+  "feeNote": "Service charge may be added for parties of 6 or more.",
+  "sections": [
+    {
+      "id": "classics",
+      "name": "Classics",
+      "items": [
+        {
+          "name": "Moville Seafood Chowder",
+          "description": "Soda bread, butter",
+          "price": "12"
+        },
+        {
+          "name": "Fish & Chips",
+          "description": "Mushy peas, tartar, curry sauce",
+          "price": "18"
+        },
+        {
+          "name": "The Emerald Burger",
+          "description": "Irish cheddar, onion jam, fries",
+          "price": "17"
+        },
+        {
+          "name": "Shepherd\u2019s Pie",
+          "description": "Lamb, root veg, mash",
+          "price": "16"
+        }
+      ]
+    },
+    {
+      "id": "specials",
+      "name": "Specials",
+      "items": [
+        {
+          "name": "Sunday Roast",
+          "description": "From noon until it\u2019s gone",
+          "price": "22"
+        },
+        {
+          "name": "House Bloody Mary",
+          "description": "Spicy or pickled \u00b7 bacon +\u20ac2",
+          "price": "11"
+        }
+      ]
+    }
+  ]
+}

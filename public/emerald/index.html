@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The Emerald · Moville — Irish bar & restaurant on Main Street. Lunch, dinner & brunch on weekends including a traditional Sunday roast. A proper pint of Guinness."
+    />
+    <title>The Emerald · Moville</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header" id="site-header">
+      <a class="brand" href="#top">
+        <img src="./images/logo.png" alt="" width="48" height="58" />
+        <span>The Emerald</span>
+      </a>
+      <a class="tonight-cue" id="tonight-cue" href="#tonight">
+        <span class="tonight-cue__label" data-tonight-label>Tonight</span>
+        <span class="tonight-cue__line" data-tonight-line>Live music Wed–Sunday</span>
+      </a>
+      <nav class="site-nav" id="site-nav">
+        <a href="#tonight">Tonight</a>
+        <a href="#menus">Menus</a>
+        <a href="#music">Music</a>
+        <a href="#visit">Visit</a>
+      </nav>
+      <a
+        class="btn btn--gold"
+        href="#visit"
+        >Reservations</a
+      >
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="sr-only">Menu</span>
+        <span></span><span></span>
+      </button>
+    </header>
+
+    <main id="main">
+      <section id="top" class="hero">
+        <div class="hero__panel">
+          <p class="hero__place">Main Street · Moville, Co. Donegal</p>
+          <h1>The Emerald</h1>
+          <p class="hero__line">
+            Irish bar &amp; restaurant on Main Street. Lunch, dinner &amp; brunch on weekends including a traditional Sunday roast.
+          </p>
+          <div class="hero__actions">
+            <a
+              class="btn btn--gold"
+              href="#visit"
+              >Reservations</a
+            >
+            <a class="hero__menu-link" href="#menus">Food Menu</a>
+          </div>
+        </div>
+        <figure class="hero__media">
+          <img
+            class="hero__img"
+            src="./images/hero-pour.jpg"
+            alt="A Guinness pour at The Emerald, Main Street Moville"
+            width="1920"
+            height="1080"
+            fetchpriority="high"
+          />
+        </figure>
+      </section>
+
+      <section class="board" id="tonight" aria-label="What’s on">
+        <p class="board__kicker" id="board-kicker">
+          <strong data-tonight-label>Tonight</strong>
+          <span data-tonight-detail>Live Music Wed–Sunday · Traditional Sunday roast from 12pm · Trivia on Tuesday nights</span>
+        </p>
+        <div class="board__grid" data-board-grid></div>
+      </section>
+
+      <section class="section pint" id="pint">
+        <div class="pint__copy">
+          <p class="eyebrow">The pint</p>
+          <h2>A proper pint of Guinness on Main Street.</h2>
+          <p>Check out our beer list or craft cocktail menu.</p>
+          <p class="pint__aside">
+            <a href="#menus">See drinks</a>
+          </p>
+        </div>
+        <div class="pint__montage" aria-label="Pints at The Emerald">
+          <figure>
+            <img
+              src="./images/pint-grid-1.jpg"
+              alt="A settled pint of Guinness at The Emerald"
+              width="900"
+              height="900"
+              loading="lazy"
+            />
+          </figure>
+          <figure>
+            <img
+              src="./images/pint-grid-2.jpg"
+              alt="Pints on the bar at The Emerald"
+              width="900"
+              height="900"
+              loading="lazy"
+            />
+          </figure>
+          <figure>
+            <img
+              src="./images/pint-grid-3.jpg"
+              alt="A fresh pour beside the Guinness harp tap"
+              width="900"
+              height="900"
+              loading="lazy"
+            />
+          </figure>
+          <figure>
+            <img
+              src="./images/pint-grid-4.jpg"
+              alt="A round of pints at The Emerald"
+              width="900"
+              height="900"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section class="section menus menus--light" id="favourites" aria-label="Light menu">
+        <div data-light-menu></div>
+      </section>
+
+      <section class="section menus" id="menus">
+        <div class="menus__intro">
+          <p class="eyebrow">Full menus</p>
+          <h2>Brunch, Lunch, Dinner, Drinks &amp; Sunday Roast.</h2>
+          <p class="lede">
+            Irish cooking, kept honest. Menu pricing does not
+            include 3% hospitality fee.
+          </p>
+        </div>
+
+        <div class="menu-services" role="tablist" aria-label="Menu">
+          <button type="button" class="is-active" data-menu="brunch" role="tab" aria-selected="true">Brunch</button>
+          <button type="button" data-menu="lunch" role="tab" aria-selected="false">Lunch</button>
+          <button type="button" data-menu="dinner" role="tab" aria-selected="false">Dinner</button>
+          <button type="button" data-menu="drinks" role="tab" aria-selected="false">Drinks</button>
+          <button type="button" data-menu="roast" role="tab" aria-selected="false">Sunday Roast</button>
+        </div>
+
+        <!-- BRUNCH — from their Brunch menu -->
+        <div class="menu-panel is-active" id="menu-brunch" data-panel="brunch" role="tabpanel">
+          <p class="menu-meta">Weekend brunch · Outdoor tables when the weather allows</p>
+          <div class="menu-columns">
+            <div class="menu-block menu-block--highlight">
+              <h3>The Sunday Roast</h3>
+              <p class="menu-block__note">Available from noon on Sundays · €22</p>
+              <ul class="menu-list">
+                <li>
+                  <div class="menu-item">
+                    <strong>Choice of roasts</strong><span class="price">22</span>
+                  </div>
+                  <span>Ask your server. Served with roast potatoes, cabbage, carrots, Yorkshire pudding &amp; gravy.</span>
+                </li>
+              </ul>
+              <figure class="menu-block__media">
+                <img
+                  src="./images/clean-roast.jpg"
+                  alt="Sunday roast at The Emerald — beef, Yorkshire pudding, roast potatoes"
+                  width="1600"
+                  height="1200"
+                  loading="lazy"
+                />
+              </figure>
+            </div>
+
+            <div class="menu-block">
+              <h3>Appetizers</h3>
+              <ul class="menu-list">
+                <li><div class="menu-item"><strong>Farmhouse Bread &amp; Butter</strong><span class="price">5</span></div><span>V</span></li>
+                <li><div class="menu-item"><strong>Cheesey Pearl Barley Bites</strong><span class="price">8</span></div><span>V</span></li>
+                <li><div class="menu-item"><strong>Emerald Fried Chicken</strong><span class="price">14</span></div></li>
+                <li><div class="menu-item"><strong>House Smoked Salmon</strong><span class="price">9</span></div><span>GFO</span></li>
+                <li><div class="menu-item"><strong>Scotch Egg</strong><span class="price">10</span></div></li>
+                <li><div class="menu-item"><strong>Daily Housemade Soup</strong><span class="price">10</span></div><span>GFO</span></li>
+                <li><div class="menu-item"><strong>Irish Seafood Chowder</strong><span class="price">14</span></div></li>
+                <li><div class="menu-item"><strong>Fish Bites</strong><span class="price">9</span></div></li>
+                <li><div class="menu-item"><strong>Pigs in a Blanket</strong><span class="price">9</span></div></li>
+              </ul>
+            </div>
+
+            <div class="menu-block">
+              <h3>Egg Breakfast</h3>
+              <ul class="menu-list">
+                <li>
+                  <div class="menu-item"><strong>The Emerald Full Irish Breakfast</strong><span class="price">21</span></div>
+                  <span>Two eggs, Irish bacon, Irish sausage, mushroom, tomato, white &amp; black pudding, Irish beans, home fries &amp; toast.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Small Full Irish</strong><span class="price">15</span></div>
+                  <span>Two eggs, sausage or bacon, home fries &amp; toast.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>The Irish Breakfast Sandwich</strong><span class="price">15</span></div>
+                  <span>Fried egg, Irish bacon, Irish sausage, on a sub roll served with home fries.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Braised Beef Hash with Eggs</strong><span class="price">16</span></div>
+                  <span>Slow cooked beef hash with two eggs, toast &amp; home fries.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Baked Eggs &amp; Beans</strong><span class="price">16</span></div>
+                  <span>Harissa beans, chorizo, cilantro &amp; toast.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Avocado Toast</strong><span class="price">16</span></div>
+                  <span>Grilled corn, poached eggs, radish, mustard seeds &amp; cherry tomatoes on sourdough.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Eggs Benedict</strong><span class="price">18</span></div>
+                  <span>Poached eggs, toasted English muffin, carved ham, hollandaise, home fries.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="menu-block">
+              <h3>Classics</h3>
+              <ul class="menu-list">
+                <li>
+                  <div class="menu-item"><strong>Fish &amp; Chips</strong><span class="price">24</span></div>
+                  <span>Fresh haddock, triple cooked fries, mushy peas, tartar sauce &amp; curry sauce.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Grilled Ham &amp; Cheese Toastie</strong><span class="price">14</span></div>
+                  <span>Irish batch bread, freshly sliced ham &amp; cheddar cheese.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>The Emerald Beef Burger</strong><span class="price">19</span></div>
+                  <span>Tomato, lettuce mayo mix, onion ring, house ketchup on a brioche bun with skinny fries.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Shepherd’s Pie</strong><span class="price">22</span></div>
+                  <span>Classic lamb shepherds pie.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Fried Chicken BLT</strong><span class="price">16</span></div>
+                  <span>Lettuce mayo mix, tomato, Irish bacon on a brioche bun with skinny fries.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>The Irish Fish Fry Sandwich</strong><span class="price">16</span></div>
+                  <span>Crispy battered haddock, lettuce mayo mix on a brioche bun with skinny fries.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="menu-block">
+              <h3>From the Garden</h3>
+              <ul class="menu-list">
+                <li>
+                  <div class="menu-item"><strong>Caesar Salad</strong><span class="price">15</span></div>
+                  <span>Romaine, parmesan, Caesar dressing, croutons &amp; anchovies.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Irish Iceberg Wedge</strong><span class="price">15</span></div>
+                  <span>Cashel blue, heirloom tomato, cucumber, Irish bacon, pickled onions &amp; buttermilk dressing.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Beet Root Salad</strong><span class="price">15</span></div>
+                  <span>Gem lettuce, yellow &amp; red beets, goat cheese, apple, pumpkin seeds &amp; honey lime dressing.</span>
+                </li>
+              </ul>
+              <p class="menu-note">Add chicken +8 · salmon +10 · falafel +6</p>
+            </div>
+
+            <div class="menu-block">
+              <h3>Brunch Cocktails</h3>
+              <ul class="menu-list">
+                <li><div class="menu-item"><strong>House Bloody Mary</strong><span class="price">14</span></div><span>Regular, Spicy, or Pickled · bacon add €2</span></li>
+                <li><div class="menu-item"><strong>Iced Irish Coffee</strong><span class="price">14</span></div></li>
+                <li><div class="menu-item"><strong>Executive Mimosa</strong><span class="price">14</span></div></li>
+                <li><div class="menu-item"><strong>Peach Bellini</strong><span class="price">14</span></div></li>
+                <li><div class="menu-item"><strong>Iced Dee’spresso Martini</strong><span class="price">15</span></div></li>
+                <li><div class="menu-item"><strong>Limoncello Spritz</strong><span class="price">14</span></div></li>
+                <li><div class="menu-item"><strong>Pink Gin &amp; Tonic</strong><span class="price">14</span></div></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- LUNCH — from their Lunch menu -->
+        <div class="menu-panel" id="menu-lunch" data-panel="lunch" role="tabpanel" hidden>
+          <p class="menu-meta">Lunch · Main Street</p>
+          <div class="menu-columns">
+            <div class="menu-block">
+              <h3>Oysters</h3>
+              <ul class="menu-list">
+                <li><div class="menu-item"><strong>Seasonal Coastal Oysters</strong><span class="price">3 / 16 / 28</span></div><span>Each · ½ dozen · dozen · GF</span></li>
+              </ul>
+            </div>
+
+            <div class="menu-block">
+              <h3>Appetizers</h3>
+              <ul class="menu-list">
+                <li>
+                  <div class="menu-item"><strong>Farmhouse Bread &amp; Butter</strong><span class="price">5</span></div>
+                  <span>Homemade Irish soda bread &amp; dinner rolls with Kerrygold butter. V</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Cheesey Pearl Barley Bites</strong><span class="price">8</span></div>
+                  <span>With parsley aioli. V</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Emerald Fried Chicken</strong><span class="price">14</span></div>
+                  <span>Served with curry sauce.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>House Smoked Salmon</strong><span class="price">9</span></div>
+                  <span>Capers &amp; horseradish cream, with crispy bread. GFO</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Pigs in a Blanket</strong><span class="price">9</span></div>
+                  <span>Puff pastry wrapped sausage &amp; Coleman’s mustard.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Scotch Egg</strong><span class="price">9</span></div>
+                  <span>Soft boiled egg wrapped in sausage &amp; breadcrumbs, with apple sauce.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Fish Bites</strong><span class="price">9</span></div>
+                  <span>Breaded haddock pieces with spicy mayo.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Daily House Made Soup</strong><span class="price">10</span></div>
+                  <span>Served with Irish soda bread &amp; Kerrygold butter. GFO</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Irish Seafood Chowder</strong><span class="price">14</span></div>
+                  <span>Mussels, clams, shrimp, smoked haddock &amp; salmon, with Irish soda bread.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Chicken &amp; Mushroom Puff Pastry</strong><span class="price">14</span></div>
+                  <span>Topped with parmesan cheese.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="menu-block">
+              <h3>Sandwiches</h3>
+              <p class="menu-block__note">Available as a wrap · choice of fries or cup of soup</p>
+              <ul class="menu-list">
+                <li>
+                  <div class="menu-item"><strong>Reuben Sandwich</strong><span class="price">16</span></div>
+                  <span>Sauerkraut, mustard, Thousand Island on rye.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Roast Beef on Sourdough</strong><span class="price">16</span></div>
+                  <span>Horseradish cream, arugula, pesto.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Fried Chicken BLT</strong><span class="price">14</span></div>
+                  <span>Lettuce mayo mix, tomato, Irish bacon on brioche.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Grilled Focaccia</strong><span class="price">14</span></div>
+                  <span>Sun-dried tomato, mozzarella, arugula &amp; pesto.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Emerald Chicken Salad Sandwich</strong><span class="price">14</span></div>
+                  <span>Shredded chicken, mayo, celery, crisp apple mix on toasted rye.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Spinach Falafel Wrap</strong><span class="price">15</span></div>
+                  <span>Tomato, lettuce, hummus &amp; Greek yogurt dressing.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Turkey Avocado BLT</strong><span class="price">16</span></div>
+                  <span>Oven roasted turkey, avocado, bacon, lettuce, tomato on ciabatta.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>The Irish Fish Fry Sandwich</strong><span class="price">16</span></div>
+                  <span>Fresh haddock, lettuce mayo mix, tartar sauce, on a brioche bun.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Grilled Ham and Cheese Toastie</strong><span class="price">14</span></div>
+                  <span>On Brennan’s Irish batch bread.</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="menu-block">
+              <h3>Classics</h3>
+              <ul class="menu-list">
+                <li>
+                  <div class="menu-item"><strong>Fish &amp; Chips</strong><span class="price">22</span></div>
+                  <span>Fresh haddock, triple cooked fries, mushy peas, tartar sauce &amp; curry sauce.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>The Emerald Beef Burger</strong><span class="price">19</span></div>
+                  <span>Tomato, lettuce mayo mix, house ketchup, onion ring on brioche with fries.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Shepherds Pie</strong><span class="price">22</span></div>
+                  <span>Classic lamb shepherds pie.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Guinness Beef Stew</strong><span class="price">22</span></div>
+                  <span>Slow cooked beef, Guinness gravy, carrots &amp; potatoes.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Roasted Salmon Risotto</strong><span class="price">25</span></div>
+                  <span>Roasted butternut squash &amp; wild mushroom. GF</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="menu-block">
+              <h3>Sides</h3>
+              <ul class="menu-list">
+                <li><div class="menu-item"><strong>Triple Cooked Fries</strong><span class="price">8</span></div></li>
+                <li><div class="menu-item"><strong>Skinny Fries</strong><span class="price">6</span></div></li>
+                <li><div class="menu-item"><strong>Mashed Potatoes</strong><span class="price">7</span></div></li>
+                <li><div class="menu-item"><strong>Sautéed Carrots</strong><span class="price">6</span></div></li>
+                <li><div class="menu-item"><strong>Side Salad</strong><span class="price">8</span></div></li>
+                <li><div class="menu-item"><strong>Tender Stem Broccoli</strong><span class="price">7</span></div></li>
+                <li><div class="menu-item"><strong>Fried Garlic Potatoes</strong><span class="price">7</span></div></li>
+              </ul>
+              <p class="menu-note">See your server for dessert menu &amp; specials.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- DINNER -->
+        <div class="menu-panel" id="menu-dinner" data-panel="dinner" role="tabpanel" hidden>
+          <p class="menu-meta">Dinner · Guest Favourites</p>
+          <div class="menu-columns">
+            <div class="menu-block">
+              <h3>Guest Favourites</h3>
+              <p class="menu-block__note">Modern Irish Hospitality — evening service.</p>
+              <ul class="menu-list">
+                <li>
+                  <div class="menu-item"><strong>Fish &amp; Chips</strong><span class="price">22</span></div>
+                  <span>Fresh haddock, triple cooked fries, mushy peas, tartar sauce &amp; curry sauce.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>The Emerald Beef Burger</strong><span class="price">19</span></div>
+                  <span>Tomato, lettuce mayo mix, house ketchup, onion ring on brioche with fries.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Shepherds Pie</strong><span class="price">22</span></div>
+                  <span>Classic lamb shepherds pie.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Guinness Beef Stew</strong><span class="price">22</span></div>
+                  <span>Slow cooked beef, Guinness gravy, carrots &amp; potatoes.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Roasted Salmon Risotto</strong><span class="price">25</span></div>
+                  <span>Roasted butternut squash &amp; wild mushroom. GF</span>
+                </li>
+              </ul>
+              <p class="menu-note">
+                Ask your server for tonight’s specials.
+                <a href="#menus" target="_blank" rel="noreferrer">Fish &amp; chips reviews</a>
+              </p>
+            </div>
+            <div class="menu-block">
+              <h3>From the Garden</h3>
+              <ul class="menu-list">
+                <li>
+                  <div class="menu-item"><strong>Caesar Salad</strong><span class="price">15</span></div>
+                  <span>Romaine, parmesan, Caesar dressing, croutons &amp; anchovies.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Irish Iceberg Wedge</strong><span class="price">15</span></div>
+                  <span>Cashel blue, heirloom tomato, cucumber, Irish bacon, pickled onions &amp; buttermilk dressing.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Beet Root Salad</strong><span class="price">15</span></div>
+                  <span>Gem lettuce, yellow &amp; red beets, goat cheese, apple, pumpkin seeds &amp; honey lime dressing.</span>
+                </li>
+              </ul>
+              <p class="menu-note">Add chicken +8 · salmon +10 · falafel +6 · Menu pricing does not include 3% hospitality fee.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- DRINKS — from their drink menus -->
+        <div class="menu-panel" id="menu-drinks" data-panel="drinks" role="tabpanel" hidden>
+          <p class="menu-meta">Beer list &amp; craft cocktail menu</p>
+          <div class="menu-columns">
+            <div class="menu-block">
+              <h3>Cocktails</h3>
+              <ul class="menu-list">
+                <li>
+                  <div class="menu-item"><strong>Barrel Aged Old Fashioned</strong><span class="price">16</span></div>
+                  <span>Tullamore D.E.W. · Angostura bitters · simple syrup</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Spicy Mango Marg</strong><span class="price">16</span></div>
+                  <span>Jose Cuervo Tradicional · habanero · mango · agave · lime</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>The Emerald</strong><span class="price">16</span></div>
+                  <span>Four Walls Irish American Whiskey · Cointreau · sweet vermouth · orange bitters</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Bramble</strong><span class="price">16</span></div>
+                  <span>Muff Irish Gin · lemon · simple syrup · blackcurrant liqueur</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="menu-block">
+              <h3>Seasonal Drinks</h3>
+              <ul class="menu-list">
+                <li>
+                  <div class="menu-item"><strong>Irish Coffee Martini</strong><span class="price">16</span></div>
+                  <span>Bushmills · Kahlúa · coffee · brown sugar · fresh Irish cream</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Seasonal Sangria</strong><span class="price">15</span></div>
+                  <span>Winter fruit and spices</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Winter Thyme Negroni</strong><span class="price">16</span></div>
+                  <span>Muff Irish Gin · Campari · sweet vermouth · cranberry/thyme · orange bitters · try with Muff Peated Irish Whiskey</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="menu-block">
+              <h3>Draft</h3>
+              <ul class="menu-list">
+                <li><div class="menu-item"><strong>Guinness</strong><span class="price">10</span></div><span>Stout · Dublin · 4.2%</span></li>
+                <li><div class="menu-item"><strong>Kilkenny</strong><span class="price">10</span></div><span>Cream ale · 4.2%</span></li>
+                <li><div class="menu-item"><strong>Atlantic Pale</strong><span class="price">6</span></div><span>Local pale · Donegal · 4.2%</span></li>
+                <li><div class="menu-item"><strong>Smithwick’s</strong><span class="price">8</span></div><span>5.0%</span></li>
+                <li><div class="menu-item"><strong>Harp</strong><span class="price">9</span></div><span>Irish lager · 4.5%</span></li>
+                <li><div class="menu-item"><strong>Maine Lunch IPA</strong><span class="price">10</span></div><span>7%</span></li>
+                <li><div class="menu-item"><strong>Harpoon IPA</strong><span class="price">8</span></div><span>5.9%</span></li>
+                <li><div class="menu-item"><strong>Smithwick’s</strong><span class="price">10</span></div><span>Red ale · Kilkenny · 4.5%</span></li>
+                <li><div class="menu-item"><strong>The White Hag Little Fawn</strong><span class="price">9</span></div><span>Irish IPA · Sligo · 4.2%</span></li>
+              </ul>
+              <p class="menu-note">Full draft, bottles &amp; cans listed at the bar.</p>
+            </div>
+
+            <div class="menu-block">
+              <h3>The Whiskey Club</h3>
+              <p class="menu-block__note">Sip and sample our delicious array of whiskey</p>
+              <ul class="menu-list">
+                <li><div class="menu-item"><strong>Jameson Original</strong><span class="price">10</span></div></li>
+                <li><div class="menu-item"><strong>Tullamore Dew</strong><span class="price">9</span></div></li>
+                <li><div class="menu-item"><strong>Bushmills</strong><span class="price">10</span></div></li>
+                <li><div class="menu-item"><strong>Bushmills Black Bush</strong><span class="price">14</span></div></li>
+                <li><div class="menu-item"><strong>Red Breast 12yr</strong><span class="price">15</span></div></li>
+                <li><div class="menu-item"><strong>Green Spot</strong><span class="price">15</span></div></li>
+                <li><div class="menu-item"><strong>Yellow Spot 12yr</strong><span class="price">30</span></div></li>
+                <li><div class="menu-item"><strong>Teeling Small Batch</strong><span class="price">12</span></div></li>
+                <li><div class="menu-item"><strong>Writers Tears Copper Pot</strong><span class="price">12</span></div></li>
+                <li><div class="menu-item"><strong>Powers Irish Whiskey</strong><span class="price">10</span></div></li>
+              </ul>
+              <p class="menu-note">Full whiskey list — blended, pot still, single malt &amp; Scotch — ask the bar. Pricing does not include 3% hospitality fee.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUNDAY ROAST — their page copy -->
+        <div class="menu-panel" id="menu-roast" data-panel="roast" role="tabpanel" hidden>
+          <div class="menu-columns">
+            <div class="menu-block menu-block--highlight">
+              <p class="eyebrow">Irish bar & restaurant on Main Street</p>
+              <h3>Traditional Sunday Roast</h3>
+              <p>
+                Join us on Sunday for our weekly traditional Sunday roast dinner. Each week roast beef
+                will be served along with a rotating roast. Check our socials for our rotating Sunday
+                Roast Dinner selection.
+              </p>
+              <figure class="menu-block__media">
+                <img
+                  src="./images/clean-roast.jpg"
+                  alt="Sunday roast at The Emerald — beef, Yorkshire pudding, roast potatoes"
+                  width="1600"
+                  height="1200"
+                  loading="lazy"
+                />
+              </figure>
+              <ul class="menu-list">
+                <li>
+                  <div class="menu-item"><strong>Roast beef &amp; rotating roast</strong><span class="price">28</span></div>
+                  <span>Roast potatoes, cabbage, carrots, Yorkshire pudding &amp; gravy.</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Live Irish Music</strong></div>
+                  <span>Every Sat &amp; Sun @ 3pm</span>
+                </li>
+                <li>
+                  <div class="menu-item"><strong>Served</strong></div>
+                  <span>From 12pm until sold out</span>
+                </li>
+              </ul>
+              <p class="menu-note">Reservations at the bar — or book ahead.</p>
+              <a
+                class="btn btn--gold"
+                href="#visit"
+                >Reservations</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section music" id="music">
+        <div class="music__head">
+          <div>
+            <p class="eyebrow" data-programme-eyebrow>Live Music</p>
+            <h2 data-programme-title>Live Music Wed–Sunday.</h2>
+            <p class="lede">Live Irish music every Sat &amp; Sun @ 3pm.</p>
+          </div>
+        </div>
+
+        <figure class="music__hero">
+          <img
+            src="./images/live-music.png"
+            alt="Live music in The Emerald"
+            width="373"
+            height="536"
+            loading="lazy"
+          />
+        </figure>
+
+        <ol class="lineup" data-lineup></ol>
+        <p class="music__note" data-programme-note>
+          Line-ups can shift —
+          <a href="#" target="_blank" rel="noreferrer">check Instagram</a>
+          · Enquiries
+          <a href="mailto:hello@theemerald.example">hello@theemerald.example</a>
+        </p>
+      </section>
+
+      <section class="section events" id="events">
+        <p class="eyebrow">Events</p>
+        <h2>Book your next event with us.</h2>
+        <div class="events__grid">
+          <article>
+            <h3>Trivia on Tuesday nights</h3>
+            <p>
+              Round up your colleagues &amp; friends! Join us every Tuesday night in our dining room
+              for Opinionation-style trivia. We host two rounds at 7pm &amp; 8pm with prizes &amp;
+              gift cards for the winning team. Trivia-only food specials for participating teams.
+            </p>
+          </article>
+          <article>
+            <h3>Private events</h3>
+            <p>
+              Contact us for your next event. Private space and room available. Contact our event
+              manager Margie for more detail —
+              <a href="mailto:hello@theemerald.example">hello@theemerald.example</a>
+            </p>
+          </article>
+          <article>
+            <h3>Sunday brunch</h3>
+            <p>
+              Join us every week for Sunday brunch including our weekly Sunday Roast dinner. From
+              10am every Sunday. Outdoor covered patio &amp; beer garden seating options available.
+              Bookings at the bar or by phone.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section visit" id="visit">
+        <div class="visit__layout">
+          <div>
+            <p class="eyebrow">Visit</p>
+            <h2>Irish bar & restaurant on Main Street</h2>
+            <p class="lede">
+              Main Street, Moville, Co. Donegal — lunch, dinner &amp; brunch on weekends including a
+              traditional Sunday roast.
+            </p>
+            <dl class="visit__facts">
+              <div>
+                <dt>Hours</dt>
+                <dd>Mon–Thu 16:00–23:00<br />Fri–Sat 15:00–00:30<br />Sun 12:30–22:00</dd>
+              </div>
+              <div>
+                <dt>Address</dt>
+                <dd>Main Street<br />Moville, Co. Donegal</dd>
+              </div>
+              <div>
+                <dt>Contact</dt>
+                <dd>
+                  <a href="mailto:hello@theemerald.example">hello@theemerald.example</a>
+                </dd>
+              </div>
+            </dl>
+            <div class="visit__actions">
+              <a
+                class="btn btn--gold"
+                href="#visit"
+                >Reservations</a
+              >
+              <a
+                class="btn btn--ghost"
+                href="https://www.google.com/maps/dir/?api=1&destination=Main+Street,+Moville,+Co.+Donegal"
+                target="_blank"
+                rel="noreferrer"
+                >Get directions</a
+              >
+</div>
+          </div>
+          <aside class="visit__award" aria-label="On Main Street">
+            <p class="visit__award-line">
+              <span class="visit__award-rule" aria-hidden="true"></span>
+              <span class="visit__award-kicker">Moville</span>
+              <span class="visit__award-rule" aria-hidden="true"></span>
+            </p>
+            <p class="visit__award-title">Main Street · Moville</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer__brand">
+        <img src="./images/logo.png" alt="The Emerald" width="72" height="88" />
+        <div>
+          <p class="footer__name">The Emerald</p>
+          <p>Irish bar &amp; restaurant · Moville</p>
+        </div>
+      </div>
+      <div class="footer__links">
+        <a href="#" target="_blank" rel="noreferrer">Instagram</a>
+        <a href="#" target="_blank" rel="noreferrer">Facebook</a>
+<a href="https://quietobjects.ie" target="_blank" rel="noreferrer">Quiet Objects</a>
+      </div>
+      <p class="footer__credit">
+        <a href="https://quietobjects.ie" target="_blank" rel="noreferrer">A Quiet Objects demo</a>
+        · Quiet Objects demo · Fictional Moville venue
+      </p>
+    </footer>
+
+    <script type="module" src="./js/content.js"></script>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/hearth/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="The Hearth — cosy bar & restaurant in Moville. Open fires, proper food, and live music on Saturdays."
+    />
+    <meta property="og:title" content="The Hearth · Moville" />
+    <meta
+      property="og:description"
+      content="Cosy bar & restaurant with open fires, proper food, and music at the weekend."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>The Hearth · Moville</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script type="module" crossorigin src="/hearth/assets/index-C3ygiBhW.js"></script>
+    <link rel="stylesheet" crossorigin href="/hearth/assets/index-ceOJCZqU.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on('init', (user) => {
+          if (!user) {
+            window.netlifyIdentity.on('login', () => {
+              document.location.href = '/admin/'
+            })
+          }
+        })
+      }
+    </script>
+  </body>
+</html>
