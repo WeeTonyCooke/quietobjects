@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { CrtOverlay } from './components/CrtOverlay'
+import { FbChooser } from './FbChooser'
 import { useReducedMotion } from './hooks/useReducedMotion'
 
 const MCA_PATHS = [
@@ -11,17 +12,16 @@ const MCA_PATHS = [
 /** Demo transmissions — industry labels, not portfolio chrome. */
 const CHANNELS = [
   { label: 'GOLF', href: 'https://mossyglen-golf-demo.netlify.app' },
-  {
-    label: 'F&B',
-    options: [
-      { label: 'HEARTH', href: 'https://thehearthbar.netlify.app' },
-      { label: 'EMERALD', href: 'https://theemerald-moville.netlify.app' },
-    ],
-  },
+  { label: 'F&B', href: '/fb' },
   { label: 'TAXI', href: 'https://quaycars-demo.netlify.app' },
   { label: 'TRADES', href: 'https://northshoredecorating-demo.netlify.app' },
   { label: 'EVENTS', href: 'https://movillefestival.com' },
 ]
+
+function isFbPath() {
+  if (typeof window === 'undefined') return false
+  return window.location.pathname.replace(/\/$/, '') === '/fb'
+}
 
 /**
  * Soft signal plays, then:
@@ -150,6 +150,14 @@ function McaTraceLogo() {
 }
 
 export function App() {
+  if (isFbPath()) {
+    return <FbChooser />
+  }
+
+  return <HomeSignal />
+}
+
+function HomeSignal() {
   const reducedMotion = useReducedMotion()
   const videoRef = useRef(null)
   const [variant] = useState(pickVariant)
@@ -158,7 +166,6 @@ export function App() {
   const [calibrating, setCalibrating] = useState(false)
   const [idleHit, setIdleHit] = useState(0)
   const [contactRevealed, setContactRevealed] = useState(reducedMotion)
-  const [expandedChannel, setExpandedChannel] = useState(null)
 
   useEffect(() => {
     if (reducedMotion) {
@@ -311,59 +318,15 @@ export function App() {
         aria-hidden={!contactRevealed}
       >
         {CHANNELS.map((channel) => {
-          if (channel.options) {
-            const isOpen = expandedChannel === channel.label
-            const optionsId = `channel-options-${channel.label
-              .replace(/[^a-zA-Z0-9]+/g, '-')
-              .toLowerCase()}`
-            return (
-              <div
-                key={channel.label}
-                className={`channel-stack__group${isOpen ? ' channel-stack__group--open' : ''}`}
-              >
-                <button
-                  type="button"
-                  className="channel-stack__link channel-stack__toggle"
-                  aria-expanded={isOpen}
-                  aria-controls={optionsId}
-                  tabIndex={contactRevealed ? 0 : -1}
-                  onClick={() =>
-                    setExpandedChannel((current) =>
-                      current === channel.label ? null : channel.label,
-                    )
-                  }
-                >
-                  {channel.label}
-                </button>
-                <div
-                  id={optionsId}
-                  className="channel-stack__options"
-                  hidden={!isOpen}
-                >
-                  {channel.options.map((option) => (
-                    <a
-                      key={option.label}
-                      className="channel-stack__option"
-                      href={option.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      tabIndex={contactRevealed && isOpen ? 0 : -1}
-                    >
-                      {option.label}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            )
-          }
-
+          const isInternal = channel.href.startsWith('/')
           return (
             <a
               key={channel.label}
               className="channel-stack__link"
               href={channel.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(isInternal
+                ? {}
+                : { target: '_blank', rel: 'noopener noreferrer' })}
               tabIndex={contactRevealed ? 0 : -1}
             >
               {channel.label}

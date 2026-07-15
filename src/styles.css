@@ -362,13 +362,6 @@ a {
   animation: contact-reveal .95s var(--settle-ease) forwards;
 }
 
-.channel-stack__group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: clamp(0.12rem, 0.35vh, 0.35rem);
-}
-
 .channel-stack__link {
   display: block;
   color: #000;
@@ -387,16 +380,6 @@ a {
   opacity: .9;
 }
 
-.channel-stack__toggle {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  font: inherit;
-  cursor: pointer;
-  text-align: left;
-}
-
 .channel-stack__link:hover,
 .channel-stack__link:focus-visible {
   color: rgba(244, 244, 236, .96);
@@ -411,48 +394,109 @@ a {
   text-decoration-thickness: 1px;
 }
 
-.channel-stack__options {
+/* --- F&B chooser --- */
+
+.fb-chooser {
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: clamp(0.08rem, 0.25vh, 0.28rem);
-  padding-left: 0.06em;
+  justify-content: flex-end;
+  gap: clamp(1.2rem, 3vh, 2.4rem);
+  padding: clamp(22px, 4vh, 48px) clamp(18px, 4vw, 56px)
+    calc(clamp(22px, 4vh, 48px) + env(safe-area-inset-bottom));
+  background:
+    radial-gradient(120% 80% at 80% 10%, rgba(70, 90, 70, .22), transparent 55%),
+    radial-gradient(90% 70% at 10% 90%, rgba(40, 50, 40, .35), transparent 50%),
+    #050505;
+  color: rgba(244, 244, 236, .92);
 }
 
-.channel-stack__options[hidden] {
-  display: none;
-}
-
-.channel-stack__option {
-  display: block;
-  color: #000;
-  font-size: clamp(1.35rem, min(5.5vw, 5.8vh), 4.2rem);
-  font-weight: 700;
-  line-height: .9;
-  letter-spacing: -.01em;
-  text-transform: uppercase;
+.fb-chooser__back {
+  position: absolute;
+  top: clamp(18px, 3.2vh, 40px);
+  left: clamp(16px, 3.2vw, 48px);
+  color: rgba(244, 244, 236, .72);
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
+  letter-spacing: .04em;
   text-decoration: none;
-  -webkit-text-stroke: clamp(0.8px, .12vw, 1.4px) rgba(244, 244, 236, .85);
-  paint-order: stroke fill;
-  opacity: .82;
-  transition:
-    color .35s var(--settle-ease),
-    -webkit-text-stroke-color .35s var(--settle-ease),
-    opacity .35s var(--settle-ease);
+  text-transform: uppercase;
 }
 
-.channel-stack__option:hover,
-.channel-stack__option:focus-visible {
+.fb-chooser__back:hover,
+.fb-chooser__back:focus-visible {
   color: rgba(244, 244, 236, .96);
-  -webkit-text-stroke-color: rgba(255, 255, 248, 1);
-  opacity: 1;
   outline: none;
 }
 
-.channel-stack__option:focus-visible {
+.fb-chooser__label {
+  margin: 0;
+  color: rgba(244, 244, 236, .55);
+  font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.fb-chooser__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.8rem, 2vh, 1.4rem);
+}
+
+.fb-chooser__link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.fb-chooser__name {
+  color: #000;
+  font-size: clamp(2.6rem, min(11vw, 12vh), 7.5rem);
+  font-weight: 700;
+  line-height: .88;
+  letter-spacing: -.015em;
+  text-transform: uppercase;
+  -webkit-text-stroke: clamp(1.1px, .16vw, 2px) rgba(244, 244, 236, .9);
+  paint-order: stroke fill;
+  transition:
+    color .35s var(--settle-ease),
+    -webkit-text-stroke-color .35s var(--settle-ease);
+}
+
+.fb-chooser__place {
+  color: rgba(244, 244, 236, .62);
+  font-size: clamp(0.95rem, 2vw, 1.15rem);
+  letter-spacing: .02em;
+}
+
+.fb-chooser__link:hover .fb-chooser__name,
+.fb-chooser__link:focus-visible .fb-chooser__name {
+  color: rgba(244, 244, 236, .96);
+  -webkit-text-stroke-color: rgba(255, 255, 248, 1);
+}
+
+.fb-chooser__link:focus-visible {
+  outline: none;
+}
+
+.fb-chooser__link:focus-visible .fb-chooser__place {
   text-decoration: underline;
-  text-underline-offset: .08em;
-  text-decoration-thickness: 1px;
+  text-underline-offset: .12em;
+}
+
+@media (max-width: 700px) {
+  .fb-chooser {
+    justify-content: center;
+  }
+
+  .fb-chooser__name {
+    font-size: clamp(2.2rem, 14vw, 3.6rem);
+  }
 }
 
 /* --- Lockup --- */
@@ -1600,12 +1644,6 @@ a {
     -webkit-text-stroke-width: 1.1px;
   }
 
-  .channel-stack__option {
-    font-size: clamp(1.15rem, 7.5vw, 2rem);
-    line-height: .88;
-    -webkit-text-stroke-width: 0.9px;
-  }
-
   .lockup {
     margin: 0;
   }
@@ -1757,8 +1795,7 @@ a {
     animation: none !important;
   }
 
-  .channel-stack__link,
-  .channel-stack__option {
+  .channel-stack__link {
     transition: none !important;
   }
 }
