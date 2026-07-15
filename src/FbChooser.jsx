@@ -2,12 +2,12 @@ const VENUES = [
   {
     name: 'THE HEARTH',
     place: 'Bath Green · Moville',
-    href: '/hearth/',
+    href: 'https://thehearthbar.netlify.app',
   },
   {
     name: 'THE EMERALD',
     place: 'Main Street · Moville',
-    href: '/emerald/',
+    href: 'https://theemerald-moville.netlify.app',
   },
 ]
 
@@ -22,7 +22,12 @@ export function FbChooser() {
       <ul className="fb-chooser__list">
         {VENUES.map((venue) => (
           <li key={venue.name}>
-            <a className="fb-chooser__link" href={venue.href}>
+            <a
+              className="fb-chooser__link"
+              href={venue.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <span className="fb-chooser__name">{venue.name}</span>
               <span className="fb-chooser__place">{venue.place}</span>
             </a>
