@@ -1,21 +1,27 @@
-/* The Emerald — Moville Main Street (Option B shell)
-   School House White paper · Studio Green · Card Room Green · antique brass */
+/* The Emerald — Moville Main Street
+   Colour system: emerald #007A33 · teal #009B77 · mint #A8E6CE · sage #D0E8D0 · peach #FFCCBC */
 
 :root {
-  --paper: #f6f3ec;
-  --paper-deep: #efebe3;
+  --emerald: #007a33;
+  --teal: #009b77;
+  --mint: #a8e6ce;
+  --sage: #d0e8d0;
+  --peach: #ffccbc;
+
+  --paper: #f5faf7;
+  --paper-deep: var(--sage);
   --paper-lift: #ffffff;
-  --green: #878f81;
-  --green-mid: #6f776a;
-  --green-deep: #464c3e;
-  --brass: #a68b4b;
-  --brass-deep: #8a723c;
-  --drop-cloth: #c5bdac;
-  --ink: #1c1e1b;
-  --ink-soft: rgba(28, 30, 27, 0.72);
-  --ink-mute: rgba(28, 30, 27, 0.5);
-  --line: rgba(28, 30, 27, 0.1);
-  --line-strong: rgba(197, 189, 172, 0.85);
+  --green: var(--teal);
+  --green-mid: var(--emerald);
+  --green-deep: #006028;
+  --brass: #c4a35a;
+  --brass-deep: #9a7d3f;
+  --drop-cloth: var(--mint);
+  --ink: #142018;
+  --ink-soft: rgba(20, 32, 24, 0.72);
+  --ink-mute: rgba(20, 32, 24, 0.5);
+  --line: rgba(20, 32, 24, 0.1);
+  --line-strong: rgba(0, 122, 51, 0.18);
   --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
   --font-body: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
   --max: 70rem;
@@ -160,7 +166,7 @@ a {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--brass-deep);
+  color: #c4785c;
 }
 
 .tonight-cue__line {
@@ -313,7 +319,7 @@ a {
   flex-direction: column;
   justify-content: center;
   padding: clamp(2.5rem, 6vw, 4.25rem) clamp(1.5rem, 4vw, 3.25rem);
-  background: linear-gradient(165deg, #5a6354 0%, var(--green-deep) 52%, #2f342a 100%);
+  background: linear-gradient(165deg, var(--teal) 0%, var(--emerald) 48%, var(--green-deep) 100%);
   animation: rise 1s var(--ease) both;
 }
 
@@ -327,7 +333,7 @@ a {
   position: relative;
   margin: 0;
   min-height: 0;
-  background: #e8e4da;
+  background: var(--sage);
   overflow: hidden;
   display: grid;
   place-items: center;
@@ -455,7 +461,7 @@ a {
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--brass);
+  color: var(--mint);
 }
 
 .board__kicker [data-tonight-detail] {
@@ -1033,7 +1039,7 @@ a {
   gap: 0.85rem;
   margin: 0;
   padding: clamp(2rem, 4vw, 3.25rem) clamp(1.25rem, 3vw, 2rem);
-  background: var(--paper-lift);
+  background: linear-gradient(165deg, var(--peach) 0%, var(--sage) 100%);
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   text-align: center;
