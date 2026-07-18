@@ -391,7 +391,7 @@ export function App() {
           <h1 id="quiet-objects-title" className="mca-heading">
             <McaTraceLogo />
           </h1>
-          <p className="mca-subtitle">Applied Signal Research</p>
+          <p className="mca-subtitle">Digital Product Design</p>
         </div>
 
         <a
