@@ -1,0 +1,125 @@
+{
+  "eyebrow": "Live Music",
+  "title": "Live Music Wed–Sunday.",
+  "note": "Line-ups can shift — check Instagram for the latest.",
+  "tonightOverride": "",
+  "lineup": [
+    {
+      "day": 1,
+      "dayLabel": "Mon",
+      "name": "Kitchen open",
+      "time": "from 12pm",
+      "kind": "other",
+      "cue": "Kitchen open · music returns Wednesday",
+      "detail": "Kitchen from noon · Live music Wed–Sunday · Trivia on Tuesday nights",
+      "href": "#menus"
+    },
+    {
+      "day": 2,
+      "dayLabel": "Tue",
+      "name": "Pub Quiz",
+      "time": "8pm",
+      "kind": "quiz",
+      "cue": "Pub Quiz · 8pm",
+      "detail": "Trivia Tuesday in the lounge · one round at 8pm · prizes for the winning table",
+      "href": "#events"
+    },
+    {
+      "day": 3,
+      "dayLabel": "Wed",
+      "name": "Aoife Byrne",
+      "time": "9pm",
+      "kind": "music",
+      "cue": "Live music · Aoife Byrne · 9pm",
+      "detail": "Live music tonight · Aoife Byrne · 9pm",
+      "href": "#music"
+    },
+    {
+      "day": 4,
+      "dayLabel": "Thu",
+      "name": "Open Mic",
+      "time": "9pm",
+      "kind": "music",
+      "cue": "Open Mic · 9pm",
+      "detail": "Open Mic Thursday · from 9pm",
+      "href": "#music"
+    },
+    {
+      "day": 5,
+      "dayLabel": "Fri",
+      "name": "Trad Session",
+      "time": "9:30pm",
+      "kind": "music",
+      "cue": "Trad Session · 9:30pm",
+      "detail": "Trad Session Friday · from 9:30pm",
+      "href": "#music"
+    },
+    {
+      "day": 6,
+      "dayLabel": "Sat",
+      "name": "Afternoon session",
+      "time": "3pm",
+      "kind": "music",
+      "cue": "Afternoon session · 3pm",
+      "detail": "Live Irish music this afternoon · from 3pm",
+      "href": "#music"
+    },
+    {
+      "day": 6,
+      "dayLabel": "Sat",
+      "name": "The Shore Band",
+      "time": "10pm",
+      "kind": "music",
+      "cue": "The Shore Band · 10pm",
+      "detail": "The Shore Band at 10pm",
+      "href": "#music"
+    },
+    {
+      "day": 0,
+      "dayLabel": "Sun",
+      "name": "Sunday roast",
+      "time": "from 12pm",
+      "kind": "other",
+      "cue": "Sunday roast from noon · session at 3pm",
+      "detail": "Sunday roast from 12pm until sold out · Live session at 3pm",
+      "href": "#menus"
+    },
+    {
+      "day": 0,
+      "dayLabel": "Sun",
+      "name": "Sunday session",
+      "time": "3pm",
+      "kind": "music",
+      "cue": "Sunday session · 3pm",
+      "detail": "Live Irish music · Sunday session at 3pm",
+      "href": "#music"
+    }
+  ],
+  "board": [
+    {
+      "id": "music",
+      "days": "0,3,4,5,6",
+      "label": "Live Music",
+      "title": "Wed–Sunday",
+      "detail": "Live Irish music every Sat & Sun @ 3pm",
+      "href": "#music"
+    },
+    {
+      "id": "roast",
+      "days": "0",
+      "label": "Sunday",
+      "title": "Traditional roast",
+      "detail": "Served from 12pm until sold out · Book at the bar or call ahead",
+      "href": "#menus",
+      "menuTab": "roast"
+    },
+    {
+      "id": "trivia",
+      "days": "2",
+      "label": "Tuesday",
+      "title": "Pub Quiz",
+      "detail": "One round at 8pm · prizes for the winning table",
+      "href": "#events"
+    }
+  ]
+}

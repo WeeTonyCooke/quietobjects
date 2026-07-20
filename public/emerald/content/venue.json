@@ -1,0 +1,18 @@
+{
+  "name": "The Emerald",
+  "tagline": "Modern Irish Hospitality · Moville",
+  "place": "Main Street · Moville, Co. Donegal",
+  "bookingUrl": "#visit",
+  "social": {
+    "instagram": "#",
+    "facebook": "#"
+  },
+  "giftCards": {
+    "label": "Gift cards",
+    "url": ""
+  },
+  "credit": {
+    "label": "A Quiet Objects demo",
+    "url": "https://quietobjects.ie"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "eyebrow": "Favourites",
+  "title": "A few plates worth knowing.",
+  "intro": "Light menu the bar can keep honest — classics and what’s special this week. Full brunch, lunch, dinner & drinks boards live below.",
+  "feeNote": "Service charge may be added for parties of 6 or more.",
+  "sections": [
+    {
+      "id": "classics",
+      "name": "Classics",
+      "items": [
+        {
+          "name": "Day Boat Fish & Chips",
+          "description": "Mushy peas, tartar sauce",
+          "price": "24"
+        },
+        {
+          "name": "The Emerald Beef Burger",
+          "description": "Irish cheddar, onion jam, fries",
+          "price": "19"
+        },
+        {
+          "name": "Donegal Hill Mountain Shepherds Pie",
+          "description": "Braised lamb, root veg, mash",
+          "price": "22"
+        },
+        {
+          "name": "Irish Seafood Chowder",
+          "description": "Soda bread",
+          "price": "14"
+        }
+      ]
+    },
+    {
+      "id": "specials",
+      "name": "Specials",
+      "items": [
+        {
+          "name": "Traditional Sunday Roast",
+          "description": "Roast beef & rotating roast · from 12pm Sundays until sold out",
+          "price": "28"
+        },
+        {
+          "name": "House Bloody Mary",
+          "description": "Regular, Spicy, or Pickled · bacon add €2",
+          "price": "14"
+        }
+      ]
+    }
+  ]
+}
