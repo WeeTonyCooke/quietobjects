@@ -1,6 +1,6 @@
 # Quiet Objects
 
-Single-screen landing for MCA Applied Signal Research: soft signal recovery, CRT acquire, MCA calibration, and a quiet contact reveal.
+Single-screen landing for MCA: soft signal recovery, CRT acquire, MCA calibration, and a quiet contact reveal.
 
 Each visit picks a weighted sequence:
 
